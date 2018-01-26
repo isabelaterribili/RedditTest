@@ -20,10 +20,7 @@ public class ListPostsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_posts);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setLogo(R.drawable.ic_reddit);
-
+        setUpToolbar();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
@@ -75,4 +72,13 @@ public class ListPostsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layout);
 
     }
+
+    public void setUpToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.ic_reddit_white);
+        toolbar.setTitle(getString(R.string.list_title));
+        setSupportActionBar(toolbar);
+    }
 }
+
+
