@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by isabela on 27/01/2018.
  */
 
-public class UrlBuilder {
+public class UrlRetrofitBuilder {
     private static final String BASE_URL = "https://www.reddit.com/";
 
     Retrofit retrofit = new Retrofit.Builder()
