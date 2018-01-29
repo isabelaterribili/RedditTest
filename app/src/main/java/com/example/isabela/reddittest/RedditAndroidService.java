@@ -20,10 +20,10 @@ public interface RedditAndroidService {
 
     //https://www.reddit.com/r/Android/new/.json?after=t3_7t96zs
 
-    @GET("/r/Android/new/.json/after")
-    Call<Post> getNextPage(@Query("t3_7t96zs") String after);  //paginacao
+    @GET("r/Android/new/.json/after")
+    Observable<Post> getNextPage(@Query("t3_7t96zs") String after);  //paginacao
 
-    @GET("/r/Android/comments/{id}/.json")
-    Call<Post> listComments(@Path("id") String id);
+    @GET("r/Android/comments/{id}/.json")
+    Observable<Post> listComments(@Path("id") String id);
 
 }

@@ -36,5 +36,8 @@ public class PostModel {
         return imagePostPath;
     }
 
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
 
 }

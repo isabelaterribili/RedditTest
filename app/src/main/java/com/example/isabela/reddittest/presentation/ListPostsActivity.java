@@ -1,11 +1,14 @@
 package com.example.isabela.reddittest.presentation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.isabela.reddittest.ListPostsAdapter;
 import com.example.isabela.reddittest.Post;
@@ -18,6 +21,9 @@ import com.example.isabela.reddittest.UrlRetrofitBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -27,18 +33,19 @@ import retrofit2.Retrofit;
 
 public class ListPostsActivity extends AppCompatActivity {
 
+    @BindView(R.id.recycler)
+    RecyclerView recyclerView;
+
     List<PostModel> postModels;
     ListPostsAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_posts);
+        ButterKnife.bind(this);
 
         setUpToolbar();
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
         PostListClient postListClient = new PostListClient();
         Observable<Post> postObservable = postListClient.initObservable();
@@ -50,7 +57,6 @@ public class ListPostsActivity extends AppCompatActivity {
                     public void accept(Post post) throws Exception {
                         post.getKind();
                         post.getDataList();
-                        post.getChildrenList();
                     }
                 });
 

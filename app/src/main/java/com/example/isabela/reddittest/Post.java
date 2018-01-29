@@ -113,5 +113,11 @@ public class Post {
         return this.dataList.children;
     }
 
+    public String getPostTitle(int position) {
+        return getChildrenList().get(position).dataPost.postTitle;
+    }
+
+
+
 }
 

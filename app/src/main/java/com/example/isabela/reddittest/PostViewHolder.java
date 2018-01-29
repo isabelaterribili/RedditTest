@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by isabela on 25/01/2018.
  */
@@ -22,5 +24,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         postPathImage = (ImageView) view.findViewById(R.id.image_post);
         postScore = (TextView) view.findViewById(R.id.score);
     }
+
+
 
 }
