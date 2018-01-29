@@ -101,9 +101,17 @@ public class Post {
 
     public String getKind() {
         return this.kind;
+
+
     }
 
     public DataList getDataList() {
         return this.dataList;
     }
+
+    public List<Child> getChildrenList() {
+        return this.dataList.children;
+    }
+
 }
+

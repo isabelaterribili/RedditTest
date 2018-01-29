@@ -29,7 +29,7 @@ public class ListPostsActivity extends AppCompatActivity {
 
     List<PostModel> postModels;
     ListPostsAdapter adapter;
-    Post postData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,18 @@ public class ListPostsActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
         PostListClient postListClient = new PostListClient();
-        postListClient.initObservable();
+        Observable<Post> postObservable = postListClient.initObservable();
+
+        postObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Post>() {
+                    @Override
+                    public void accept(Post post) throws Exception {
+                        post.getKind();
+                        post.getDataList();
+                        post.getChildrenList();
+                    }
+                });
 
 
         postModels = new ArrayList<>();
