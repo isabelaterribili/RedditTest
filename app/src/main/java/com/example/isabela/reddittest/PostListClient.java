@@ -1,30 +1,30 @@
 package com.example.isabela.reddittest;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
-
-/**
- * Created by isabela on 29/01/2018.
- */
+import retrofit2.Retrofit;
 
 public class PostListClient {
 
-    private RedditAndroidService redditAndroidService;
+    public void initObservable() {
+        Retrofit urlRetrofitBuilder = new UrlRetrofitBuilder().createUrl();
 
-    public List<Post> getPostList() {
-        Observable<Post> call = redditAndroidService.listPosts();
-        return (List<Post>) call;
+        RedditAndroidService redditAndroidService = urlRetrofitBuilder.create(RedditAndroidService.class);
+
+        Observable<Post> postObservable = redditAndroidService.listPosts();
+
+        postObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Post>() {
+                    @Override
+                    public void accept(Post post) throws Exception {
+                        post.getKind();
+                        post.getDataList();
+                    }
+                });
+
+
     }
-
-//    Observable<Post> call = redditAndroidService.listPosts();
-//    Disposable disposable = call
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new Disposable<Post>() {
-//                }
-//            })
 }

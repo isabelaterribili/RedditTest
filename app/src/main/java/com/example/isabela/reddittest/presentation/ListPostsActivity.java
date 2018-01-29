@@ -13,6 +13,7 @@ import com.example.isabela.reddittest.PostListClient;
 import com.example.isabela.reddittest.PostModel;
 import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.RedditAndroidService;
+import com.example.isabela.reddittest.UrlRetrofitBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +23,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class ListPostsActivity extends AppCompatActivity {
 
     List<PostModel> postModels;
     ListPostsAdapter adapter;
-    PostListClient postListClient;
     Post postData;
 
     @Override
@@ -42,49 +40,12 @@ public class ListPostsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.reddit.com/")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RedditAndroidService redditAndroidService = retrofit.create(RedditAndroidService.class);
-
-
-        Observable<Post> postObservable = redditAndroidService.listPosts();
-
-        postObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Post>() {
-                    @Override
-                    public void accept(Post post) throws Exception {
-                        post.getKind();
-                        post.getDataList();
-                    }
-                });
+        PostListClient postListClient = new PostListClient();
+        postListClient.initObservable();
 
 
         postModels = new ArrayList<>();
 
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
         postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
         postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
         postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
