@@ -13,6 +13,11 @@ import java.util.List;
 
 public class Post {
 
+    Post(String kind, DataList dataList) {
+        this.kind = kind;
+        this.dataList = dataList;
+    }
+
     @SerializedName("kind")
     String kind;
 
@@ -92,5 +97,13 @@ public class Post {
 
         @SerializedName("height")
         int height;
+    }
+
+    public String getKind() {
+        return this.kind;
+    }
+
+    public DataList getDataList() {
+        return this.dataList;
     }
 }

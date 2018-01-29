@@ -1,4 +1,4 @@
-package com.example.isabela.reddittest;
+package com.example.isabela.reddittest.presentation;
 
 import android.app.Fragment;
 

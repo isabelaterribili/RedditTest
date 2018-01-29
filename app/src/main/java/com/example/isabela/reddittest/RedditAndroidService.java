@@ -1,6 +1,9 @@
 package com.example.isabela.reddittest;
 
+import java.util.ArrayList;
 import java.util.List;
+import io.reactivex.Observable;
+
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,9 +14,9 @@ import retrofit2.http.Query;
  * Created by isabela on 27/01/2018.
  */
 
-public interface ReeditService {
-    @GET("/r/Android/new/.json")
-    Call<Post> listPosts();
+public interface RedditAndroidService {
+    @GET("r/Android/new/.json")
+    Observable<Post> listPosts();
 
     //https://www.reddit.com/r/Android/new/.json?after=t3_7t96zs
 
@@ -22,4 +25,5 @@ public interface ReeditService {
 
     @GET("/r/Android/comments/{id}/.json")
     Call<Post> listComments(@Path("id") String id);
+
 }

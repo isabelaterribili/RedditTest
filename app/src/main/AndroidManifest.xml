@@ -2,11 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.isabela.reddittest">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListPostsActivity">
+        <activity android:name=".presentation.ListPostsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

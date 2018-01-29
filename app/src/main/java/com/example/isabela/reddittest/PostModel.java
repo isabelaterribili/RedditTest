@@ -6,10 +6,10 @@ package com.example.isabela.reddittest;
 
 public class PostModel {
 
-    String postTitle;
-    String imagePostPath;
-    String channelName;
-    int postScore;
+    private String postTitle;
+    private String imagePostPath;
+    private int postScore;
+
 
     public PostModel(String postTitle, String imagePostPath, int postScore) {
         this.postTitle = postTitle;
@@ -27,9 +27,6 @@ public class PostModel {
         return postTitle;
     }
 
-    public String getChannelName() {
-        return channelName;
-    }
 
     public String getPostScore() {
         return Integer.toString(postScore);
