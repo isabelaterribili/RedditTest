@@ -45,7 +45,7 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
 
         PostModel postModel = listPostModel.get(position);
 
-        postViewHolder.postChannelName.setText(postModel.getChannelName());
+        postViewHolder.postScore.setText(postModel.getPostScore());
         postViewHolder.postTitle.setText(postModel.getPostTitle());
 //        postViewHolder.postPathImage.setImageURI("");
 

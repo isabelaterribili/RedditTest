@@ -9,17 +9,19 @@ public class PostModel {
     String postTitle;
     String imagePostPath;
     String channelName;
+    int postScore;
 
-    public PostModel(String postTitle, String imagePostPath, String channelName) {
+    public PostModel(String postTitle, String imagePostPath, int postScore) {
         this.postTitle = postTitle;
         this.imagePostPath = imagePostPath;
-        this.channelName = channelName;
+        this.postScore = postScore;
     }
 
-    public PostModel(String postTitle, String channelName) {
+    public PostModel(String postTitle, int postScore) {
         this.postTitle = postTitle;
-        this.channelName = channelName;
+        this.postScore = postScore;
     }
+
 
     public String getPostTitle() {
         return postTitle;
@@ -29,7 +31,13 @@ public class PostModel {
         return channelName;
     }
 
+    public String getPostScore() {
+        return Integer.toString(postScore);
+    }
+
     public String getImagePostPath() {
         return imagePostPath;
     }
+
+
 }

@@ -6,17 +6,6 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <TextView
-        android:id="@+id/channel_reddit_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:fontFamily="Roboto Regular"
-        android:paddingTop="8sp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,6 +28,17 @@
             android:fontFamily="Roboto Regular"
             android:paddingLeft="56dp"
             android:paddingTop="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:fontFamily="Roboto Regular"
+            android:paddingTop="8sp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
     </RelativeLayout>

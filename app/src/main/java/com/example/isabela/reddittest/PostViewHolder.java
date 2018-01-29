@@ -13,14 +13,14 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
 
     TextView postTitle;
     ImageView postPathImage;
-    TextView postChannelName;
+    TextView postScore;
 
     PostViewHolder(View view) {
         super(view);
 
         postTitle = (TextView) view.findViewById(R.id.post_title);
         postPathImage = (ImageView) view.findViewById(R.id.image_post);
-        postChannelName = (TextView) view.findViewById(R.id.channel_reddit_post);
+        postScore = (TextView) view.findViewById(R.id.score);
     }
 
 }

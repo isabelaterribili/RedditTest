@@ -26,41 +26,29 @@ public class ListPostsActivity extends AppCompatActivity {
 
         postModels = new ArrayList<>();
 
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", "r/restofthefuckingowl"));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
+
 
         adapter = new ListPostsAdapter(postModels, ListPostsActivity.this);
 
