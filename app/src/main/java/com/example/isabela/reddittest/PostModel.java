@@ -1,5 +1,7 @@
 package com.example.isabela.reddittest;
 
+import android.net.Uri;
+
 /**
  * Created by isabela on 25/01/2018.
  */

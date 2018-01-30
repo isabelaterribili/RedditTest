@@ -35,7 +35,6 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         view.setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(context, PostDetailActivity.class); //Passar para próxima activity o id para listar os comentários

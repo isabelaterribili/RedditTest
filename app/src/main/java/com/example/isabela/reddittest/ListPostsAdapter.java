@@ -1,10 +1,13 @@
 package com.example.isabela.reddittest;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,7 +44,13 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
 
         postViewHolder.postScore.setText(postModel.getPostScore());
         postViewHolder.postTitle.setText(postModel.getPostTitle());
-//        postViewHolder.postPathImage.setImageURI("");
+
+        Uri uri = Uri.parse(postModel.getImagePostPath());
+        Context context = ((PostViewHolder) viewHolder).postPathImage.getContext();
+
+        Picasso.with(context).load(uri).into(((PostViewHolder) viewHolder).postPathImage);
+
+//        Picasso.with(this).load("https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg").into(thumbnailPost);
 
     }
 

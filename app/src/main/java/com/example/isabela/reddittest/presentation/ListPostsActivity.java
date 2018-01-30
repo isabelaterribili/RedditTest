@@ -6,12 +6,14 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
 import com.example.isabela.reddittest.ListPostsAdapter;
 import com.example.isabela.reddittest.Post;
 import com.example.isabela.reddittest.PostListClient;
 import com.example.isabela.reddittest.PostModel;
 import com.example.isabela.reddittest.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,27 +56,12 @@ public class ListPostsActivity extends AppCompatActivity {
                 });
 
 
+
         postModels = new ArrayList<>();
 
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "blablabla", 5402));
-
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg", 5402));
+        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg", 5402));
 
         adapter = new ListPostsAdapter(postModels, ListPostsActivity.this);
 
