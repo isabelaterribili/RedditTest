@@ -24,6 +24,6 @@ public interface RedditAndroidService {
     Observable<Post> getNextPage(@Query("t3_7t96zs") String after);  //paginacao
 
     @GET("r/Android/comments/{id}/.json")
-    Observable<Comment> listComments(@Path("id") String id);
+    Observable<List<PostComment>> listComments(@Path("id") String id);
 
 }

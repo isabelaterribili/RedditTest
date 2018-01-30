@@ -1,5 +1,7 @@
 package com.example.isabela.reddittest;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 
@@ -15,12 +17,12 @@ public class PostListClient {
         return postObservable;
     }
 
-    public Observable<Comment> initObservableComments(String postId) {
+    public Observable<List<PostComment>> initObservableComments(String postId) {
         Retrofit urlRetrofitBuilder = new UrlRetrofitBuilder().createUrl();
 
         RedditAndroidService redditAndroidService = urlRetrofitBuilder.create(RedditAndroidService.class);
 
-        Observable<Comment> postCommentObservable = redditAndroidService.listComments(postId); // passar o valor do id do post
+        Observable<List<PostComment>> postCommentObservable = redditAndroidService.listComments(postId); // passar o valor do id do post
 
         return postCommentObservable;
     }

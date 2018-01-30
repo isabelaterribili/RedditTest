@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.isabela.reddittest.Comment;
 import com.example.isabela.reddittest.Post;
+import com.example.isabela.reddittest.PostComment;
 import com.example.isabela.reddittest.PostListClient;
 import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.postdetail.PostCommentAdapter;
@@ -51,18 +52,19 @@ public class PostDetailActivity extends AppCompatActivity {
         setUpToolbar();
 
 
-//        PostListClient postListClient = new PostListClient();
-//
-//        Observable<Comment> postCommentObservable = postListClient.initObservableComments(postId);
-//
-//        postCommentObservable.subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread()) //TODO diposable
-//                .subscribe(new Consumer<Comment>() {
-//                    @Override
-//                    public void accept(Comment comment) throws Exception {
-//                        comment.getPostComments();
-//                    }
-//                });
+        PostListClient postListClient = new PostListClient();
+
+        Observable<List<PostComment>> postCommentObservable = postListClient.initObservableComments(postId);
+
+        postCommentObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread()) //TODO diposable
+                .subscribe(new Consumer<List<PostComment>>() {
+
+                    @Override
+                    public void accept(List<PostComment> postComments) throws Exception {
+                        postComments.size();
+                    }
+                });
 
         postCommentModelList = new ArrayList<>();
 
