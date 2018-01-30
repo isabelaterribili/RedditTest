@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_list_posts"
+    android:id="@+id/activity_post_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.isabela.reddittest.presentation.ListPostsActivity">
@@ -16,7 +16,4 @@
         android:minHeight="?attr/actionBarSize"
         app:titleMarginStart="32dp"
         app:titleTextColor="@color/baby_power" />
-
-    <include layout="@layout/post_recycler_view_cell" />
-
 </RelativeLayout>
