@@ -49,9 +49,6 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
         Context context = ((PostViewHolder) viewHolder).postPathImage.getContext();
 
         Picasso.with(context).load(uri).into(((PostViewHolder) viewHolder).postPathImage);
-
-//        Picasso.with(this).load("https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg").into(thumbnailPost);
-
     }
 
     @Override
