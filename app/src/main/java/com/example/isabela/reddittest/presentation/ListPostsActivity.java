@@ -55,8 +55,6 @@ public class ListPostsActivity extends AppCompatActivity {
                     }
                 });
 
-
-
         postModels = new ArrayList<>();
 
         postModels.add(new PostModel("What is something you hope to see in your lifetime?", "https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg", 5402));

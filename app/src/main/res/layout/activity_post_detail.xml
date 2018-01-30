@@ -5,15 +5,16 @@
     android:id="@+id/activity_post_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.isabela.reddittest.presentation.ListPostsActivity">
+    tools:context="com.example.isabela.reddittest.presentation.PostDetailActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_activity_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ToolbarColoredBackArrow"
         app:titleMarginStart="32dp"
         app:titleTextColor="@color/baby_power" />
 </RelativeLayout>
