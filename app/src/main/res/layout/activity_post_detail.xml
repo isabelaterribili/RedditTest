@@ -17,4 +17,15 @@
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleMarginStart="32dp"
         app:titleTextColor="@color/baby_power" />
+
+    <include
+        android:id="@+id/xablau"
+        layout="@layout/post_description" />
+
+    <include
+        layout="@layout/comments_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/xablau" />
+
 </RelativeLayout>

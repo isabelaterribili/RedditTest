@@ -14,4 +14,14 @@ public class PostListClient {
 
         return postObservable;
     }
+
+    public Observable<Comment> initObservableComments(String postId) {
+        Retrofit urlRetrofitBuilder = new UrlRetrofitBuilder().createUrl();
+
+        RedditAndroidService redditAndroidService = urlRetrofitBuilder.create(RedditAndroidService.class);
+
+        Observable<Comment> postCommentObservable = redditAndroidService.listComments(postId); // passar o valor do id do post
+
+        return postCommentObservable;
+    }
 }

@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -34,6 +35,8 @@ public class ListPostsActivity extends AppCompatActivity {
     List<PostModel> postModels;
     ListPostsAdapter adapter;
 
+    CompositeDisposable compositeDisposable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,7 @@ public class ListPostsActivity extends AppCompatActivity {
 
         setUpToolbar();
 
+        //TODO diposable
         PostListClient postListClient = new PostListClient();
         Observable<Post> postObservable = postListClient.initObservable();
 
@@ -54,6 +58,7 @@ public class ListPostsActivity extends AppCompatActivity {
                         post.getDataList();
                     }
                 });
+
 
         postModels = new ArrayList<>();
 
@@ -73,6 +78,13 @@ public class ListPostsActivity extends AppCompatActivity {
         DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(recyclerViewDecoration);
 
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+//        compositeDisposable.clear();
     }
 
     public void setUpToolbar() {

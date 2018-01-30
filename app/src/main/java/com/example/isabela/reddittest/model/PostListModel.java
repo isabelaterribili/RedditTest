@@ -1,4 +1,6 @@
-package com.example.isabela.reddittest;
+package com.example.isabela.reddittest.model;
+
+import com.example.isabela.reddittest.PostModel;
 
 import java.util.List;
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/grey_light"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:padding="2sp">
+
+    <LinearLayout
+        android:id="@+id/post_detail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@android:color/white"
+        android:elevation="2dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/post_image_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_reddit" />
+
+        <TextView
+            android:id="@+id/post_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:fontFamily="Roboto Regular"
+            android:paddingLeft="56dp"
+            android:text="A study found that from 2014 to 2016, there was a reduction in infant deaths in states under the Affordable Care Act (ACA), while average infant mortality rates rose in states that had not expanded Medicaid coverage."
+            android:textColor="@color/grey_dark"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
