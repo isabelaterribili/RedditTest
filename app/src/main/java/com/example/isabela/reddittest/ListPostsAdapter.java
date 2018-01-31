@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,12 +19,27 @@ import java.util.List;
 
 public class ListPostsAdapter extends RecyclerView.Adapter {
 
-    private List<PostModel> listPostModel;
+    private List<PostModel> listPostModel = new ArrayList<>();;
+    ;
     private Context context;
 
-    public ListPostsAdapter(List<PostModel> listPostModel, Context context) {
-        this.listPostModel = listPostModel;
+//    public ListPostsAdapter(List<PostModel> listPostModel, Context context) {
+//        this.listPostModel = listPostModel;
+//        this.context = context;
+//    }
+
+    public ListPostsAdapter(Context context) {
         this.context = context;
+    }
+
+    public void add(Post post) {
+        listPostModel.add(new PostModel(post.getPostTitle(0), "", 1));
+        listPostModel.add(new PostModel(post.getPostTitle(1), "", 1));
+        listPostModel.add(new PostModel(post.getPostTitle(2), "", 1));
+        listPostModel.add(new PostModel(post.getPostTitle(3), "", 1));
+        listPostModel.add(new PostModel(post.getPostTitle(4), "", 1));
+
+        notifyDataSetChanged();
     }
 
     @Override

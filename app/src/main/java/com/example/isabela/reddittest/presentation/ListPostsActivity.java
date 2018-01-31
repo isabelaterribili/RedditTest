@@ -13,7 +13,11 @@ import com.example.isabela.reddittest.Post;
 import com.example.isabela.reddittest.PostListClient;
 import com.example.isabela.reddittest.PostModel;
 import com.example.isabela.reddittest.R;
+import com.example.isabela.reddittest.RedditAndroidService;
+import com.example.isabela.reddittest.UrlRetrofitBuilder;
 import com.squareup.picasso.Picasso;
+
+import org.reactivestreams.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +25,20 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscription;
+import rx.functions.Action1;
 
 
 public class ListPostsActivity extends AppCompatActivity {
@@ -34,6 +49,8 @@ public class ListPostsActivity extends AppCompatActivity {
     List<PostModel> postModels;
     ListPostsAdapter adapter;
 
+    String xablau;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,29 +59,7 @@ public class ListPostsActivity extends AppCompatActivity {
 
         setUpToolbar();
 
-        //TODO diposable
-        PostListClient postListClient = new PostListClient();
-        Observable<Post> postObservable = postListClient.initObservable();
-
-        postObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Post>() {
-                    @Override
-                    public void accept(Post post) throws Exception {
-                        post.getKind();
-                        post.getDataList();
-                    }
-                });
-
-
-        postModels = new ArrayList<>();
-
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg", 5402));
-        postModels.add(new PostModel("What is something you hope to see in your lifetime?", "https://b.thumbs.redditmedia.com/pNymZvykz6Fi1YUSDTwiX2VCsMO8WnGapolfmEpV9XA.jpg", 5402));
-
-        adapter = new ListPostsAdapter(postModels, ListPostsActivity.this);
-
+        adapter = new ListPostsAdapter(ListPostsActivity.this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
@@ -75,12 +70,32 @@ public class ListPostsActivity extends AppCompatActivity {
         DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(recyclerViewDecoration);
 
+        //TODO diposable
+        PostListClient postListClient = new PostListClient();
+        Observable<Post> postObservable = postListClient.initObservable();
+
+        postObservable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Post>() {
+                    @Override
+                    public void accept(Post post) throws Exception {
+                        add(post);
+                    }
+                });
+
+
     }
 
 
+    private void add(Post post) {
+        adapter.add(post);
+    }
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+
 //        compositeDisposable.clear();
     }
 

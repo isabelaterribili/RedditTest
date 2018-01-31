@@ -36,16 +36,17 @@ public class Post {
     }
 
 
-    private class Child {
+    public class Child {
         @SerializedName("kind")
         String kindPost;
 
         @SerializedName("data")
+        public
         DataPost dataPost;
 
     }
 
-    private class DataPost {
+    public class DataPost {
         @SerializedName("url")
         String urlPost;
 
