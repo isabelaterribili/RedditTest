@@ -2,6 +2,7 @@ package com.example.isabela.reddittest;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class PostComment {
         List<Child> children;
     }
 
-    private class Child {
+    public class Child {
 
         @SerializedName("kind")
         String kind;
@@ -42,7 +43,13 @@ public class PostComment {
         String commentPost;
     }
 
-    public List<Child> getCommentPost() {
-        return this.dataList.children;
+    public List<String> getComments() {
+        List<String> list = new ArrayList<>();
+
+        for (Child child : this.dataList.children) {
+            if ("t1".equals(child.kind))
+                list.add(child.dataCommentList.commentPost);
+        }
+        return list;
     }
 }

@@ -8,13 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.example.isabela.reddittest.Comment;
-import com.example.isabela.reddittest.Post;
 import com.example.isabela.reddittest.PostComment;
 import com.example.isabela.reddittest.PostListClient;
 import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.postdetail.PostCommentAdapter;
-import com.example.isabela.reddittest.postdetail.PostCommentModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +35,8 @@ public class PostDetailActivity extends AppCompatActivity {
     @BindView(R.id.comments_recycler_view_cell)
     RecyclerView recyclerView;
 
-    String postId = "7tukdd";
+    String postId = "7ub1k4";
 
-    List<PostCommentModel> postCommentModelList;
     PostCommentAdapter postCommentAdapter;
 
     @Override
@@ -50,6 +46,15 @@ public class PostDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setUpToolbar();
+
+        postCommentAdapter = new PostCommentAdapter(PostDetailActivity.this);
+
+        recyclerView.setAdapter(postCommentAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
 
 
         PostListClient postListClient = new PostListClient();
@@ -62,33 +67,17 @@ public class PostDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void accept(List<PostComment> postComments) throws Exception {
-                        postComments.size();
+                        List<String> list = new ArrayList<>();
+                        for (PostComment postComment : postComments) {
+                            list.addAll(postComment.getComments());
+                        }
+                        add(list);
                     }
                 });
+    }
 
-        postCommentModelList = new ArrayList<>();
-
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-        postCommentModelList.add(new PostCommentModel("Their icon looks like a broken Tide Pod. #cannotunsee", 1));
-
-        postCommentAdapter = new PostCommentAdapter(postCommentModelList, PostDetailActivity.this);
-
-        recyclerView.setAdapter(postCommentAdapter);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
+    public void add(List<String> postComments) {
+        postCommentAdapter.addComments(postComments);
     }
 
 

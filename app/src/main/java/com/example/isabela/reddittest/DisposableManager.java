@@ -12,11 +12,11 @@ public class DisposableManager {
     private CompositeDisposable compositeDisposable =
             new CompositeDisposable();
 //    @Override public void onCreate() {
-//        compositeDisposable.add(RedditAndroidService.listPosts()
+//        compositeDisposable.addToPostList(RedditAndroidService.listPosts()
 //                .subscribe();
 
 //
-//    public void add(Disposable disposable) {
+//    public void addToPostList(Disposable disposable) {
 //        getCompositeDisposable().dispose();
 //    }
 //

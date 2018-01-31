@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.isabela.reddittest.PostModel;
-import com.example.isabela.reddittest.PostViewHolder;
+import com.example.isabela.reddittest.PostComment;
 import com.example.isabela.reddittest.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,11 +19,34 @@ import java.util.List;
 public class PostCommentAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<PostCommentModel> postCommentModelList;
+    private List<PostCommentModel> postCommentModelList = new ArrayList<>();
 
-    public PostCommentAdapter(List<PostCommentModel> postCommentModelList, Context context) {
-        this.postCommentModelList = postCommentModelList;
+    public PostCommentAdapter(Context context) {
         this.context = context;
+    }
+
+
+    public void addComments(List<String> postComments) {
+
+//        List<String> list = new ArrayList<>();
+//        for(List<String> list: postComments) {
+//            list.addAll(postComment.getComments());
+//        }
+
+        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
+        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
+
+        notifyDataSetChanged();
     }
 
     @Override

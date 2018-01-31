@@ -56,6 +56,9 @@ public class Post {
         @SerializedName("id")
         String postId; //Passar esse post id no Path para carregar os comentários
 
+        @SerializedName("score")
+        int postScore;
+
         @SerializedName("preview")
         ImagePreview imagePreview;
 
@@ -80,7 +83,7 @@ public class Post {
         List<ImageResolutions> imageResolutions;
 
         @SerializedName("url")   //devolve o tamanho de imagem padrão
-        String url;
+                String url;
 
         @SerializedName("width")
         int width;
@@ -102,12 +105,6 @@ public class Post {
 
     public String getKind() {
         return this.kind;
-
-
-    }
-
-    public DataList getDataList() {
-        return this.dataList;
     }
 
     public List<Child> getChildrenList() {
@@ -118,6 +115,17 @@ public class Post {
         return getChildrenList().get(position).dataPost.postTitle;
     }
 
+    public String getThumbnailImage(int position) {
+        return getChildrenList().get(position).dataPost.thumbnailUri;
+    }
+
+    public int getPostScore(int position) {
+        return getChildrenList().get(position).dataPost.postScore;
+    }
+
+    public String getPostId(int position) {
+        return getChildrenList().get(position).dataPost.postId;
+    }
 
 
 }
