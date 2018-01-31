@@ -19,7 +19,8 @@ import java.util.List;
 
 public class ListPostsAdapter extends RecyclerView.Adapter {
 
-    private List<PostModel> listPostModel = new ArrayList<>();;
+    private List<PostModel> listPostModel = new ArrayList<>();
+    ;
     ;
     private Context context;
 
@@ -28,25 +29,9 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
     }
 
     public void addToPostList(Post post) {
-
-        post.getPostId(0);
-
-        listPostModel.add(new PostModel(post.getPostTitle(0), post.getThumbnailImage(0), post.getPostScore(0)));
-        listPostModel.add(new PostModel(post.getPostTitle(1), post.getThumbnailImage(1), post.getPostScore(1)));
-        listPostModel.add(new PostModel(post.getPostTitle(2), post.getThumbnailImage(2), post.getPostScore(2)));
-        listPostModel.add(new PostModel(post.getPostTitle(3), post.getThumbnailImage(3), 1));
-        listPostModel.add(new PostModel(post.getPostTitle(4), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(5), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(6), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(7), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(8), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(9), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(10), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(11), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(12), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(13), "", 1));
-        listPostModel.add(new PostModel(post.getPostTitle(14), "", 1));
-
+        for (Post.Child child : post.getChildrenList()) {
+            listPostModel.add(new PostModel(child.getPostTitle(), child.getThumbnailImage(), child.getPostScore()));
+        }
         notifyDataSetChanged();
     }
 

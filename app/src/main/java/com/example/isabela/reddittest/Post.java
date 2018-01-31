@@ -41,9 +41,22 @@ public class Post {
         String kindPost;
 
         @SerializedName("data")
-        public
         DataPost dataPost;
 
+        public String getPostTitle() {
+            return dataPost.postTitle;
+        }
+
+        public String getThumbnailImage() {
+            return dataPost.thumbnailUri;
+        }
+
+        public int getPostScore() {
+            return dataPost.postScore;
+        }
+        public String getPostId() {
+            return dataPost.postId;
+        }
     }
 
     public class DataPost {
@@ -103,30 +116,9 @@ public class Post {
         int height;
     }
 
-    public String getKind() {
-        return this.kind;
-    }
-
     public List<Child> getChildrenList() {
         return this.dataList.children;
     }
-
-    public String getPostTitle(int position) {
-        return getChildrenList().get(position).dataPost.postTitle;
-    }
-
-    public String getThumbnailImage(int position) {
-        return getChildrenList().get(position).dataPost.thumbnailUri;
-    }
-
-    public int getPostScore(int position) {
-        return getChildrenList().get(position).dataPost.postScore;
-    }
-
-    public String getPostId(int position) {
-        return getChildrenList().get(position).dataPost.postId;
-    }
-
 
 }
 
