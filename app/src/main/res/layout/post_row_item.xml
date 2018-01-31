@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
+            android:maxLines = "3"
+            android:ellipsize="end"
             android:fontFamily="Roboto Regular"
             android:paddingLeft="56dp"
             android:textColor="@color/grey_dark"

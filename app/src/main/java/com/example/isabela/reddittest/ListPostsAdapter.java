@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.isabela.reddittest.model.PostListModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -20,8 +21,9 @@ import java.util.List;
 public class ListPostsAdapter extends RecyclerView.Adapter {
 
     private List<PostModel> listPostModel = new ArrayList<>();
-    ;
-    ;
+
+    private PostListModel postModelListInfo;
+
     private Context context;
 
     public ListPostsAdapter(Context context) {
@@ -29,8 +31,10 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
     }
 
     public void addToPostList(Post post) {
+        postModelListInfo = new PostListModel(post.getPostAfterId());
+
         for (Post.Child child : post.getChildrenList()) {
-            listPostModel.add(new PostModel(child.getPostTitle(), child.getThumbnailImage(), child.getPostScore()));
+            listPostModel.add(new PostModel(child.getPostTitle(), child.getThumbnailImage(), child.getPostScore(), child.getPostId()));
         }
         notifyDataSetChanged();
     }
@@ -51,8 +55,11 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
 
         PostModel postModel = listPostModel.get(position);
 
-        postViewHolder.postScore.setText(postModel.getPostScore());
+        listPostModel.get(position).getPostId();
+
+        postViewHolder.postScore.setText(context.getString(R.string.score) + postModel.getPostScore());
         postViewHolder.postTitle.setText(postModel.getPostTitle());
+//        postViewHolder.postId.
 
         Uri uri = Uri.parse(postModel.getImagePostPath());
         Context context = ((PostViewHolder) viewHolder).postPathImage.getContext();

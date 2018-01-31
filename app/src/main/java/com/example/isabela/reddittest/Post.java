@@ -1,8 +1,5 @@
 package com.example.isabela.reddittest;
 
-import android.net.Uri;
-import android.provider.ContactsContract;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -67,7 +64,7 @@ public class Post {
         String postTitle;
 
         @SerializedName("id")
-        String postId; //Passar esse post id no Path para carregar os comentários
+        String postId;
 
         @SerializedName("score")
         int postScore;
@@ -76,7 +73,7 @@ public class Post {
         ImagePreview imagePreview;
 
         @SerializedName("thumbnail")
-        String thumbnailUri; // usar essa na lista de posts
+        String thumbnailUri;
     }
 
     private class ImagePreview {
@@ -120,5 +117,8 @@ public class Post {
         return this.dataList.children;
     }
 
+    public String getPostAfterId() {
+        return this.dataList.afterId;
+    }
 }
 

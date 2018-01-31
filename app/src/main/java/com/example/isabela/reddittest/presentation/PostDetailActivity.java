@@ -1,12 +1,17 @@
 package com.example.isabela.reddittest.presentation;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.isabela.reddittest.PostComment;
 import com.example.isabela.reddittest.PostListClient;
@@ -18,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -33,15 +39,28 @@ public class PostDetailActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     @BindView(R.id.comments_recycler_view_cell)
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewCommentCell;
+
+    @BindView(R.id.post_detail_title)
+    TextView postDetailTitle;
+//
+//    @BindView(R.id.post_detail)
+//    LinearLayout postDetailItem;
+
+    String postDetailUrl;
 
     String postId = "7ub1k4";
+
+    private static final String POST_ID = "post_id";
 
     PostCommentAdapter postCommentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getIntent().getExtras().getString(POST_ID);
+
         setContentView(R.layout.activity_post_detail);
         ButterKnife.bind(this);
 
@@ -49,13 +68,18 @@ public class PostDetailActivity extends AppCompatActivity {
 
         postCommentAdapter = new PostCommentAdapter(PostDetailActivity.this);
 
-        recyclerView.setAdapter(postCommentAdapter);
+        recyclerViewCommentCell.setAdapter(postCommentAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerViewCommentCell.setLayoutManager(linearLayoutManager);
 
+        DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
+        recyclerViewCommentCell.addItemDecoration(recyclerViewDecoration);
+
+
+        postDetailTitle.setText("How common are illnesses such as the cold or the flu in other animals? and if they aren't common, why?");
 
         PostListClient postListClient = new PostListClient();
 
@@ -90,5 +114,19 @@ public class PostDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void navigateToCustomChromeTabs(String postDetailUrl) {
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        CustomTabsIntent customTabsIntent = builder.build();
+
+        builder.setToolbarColor(getColor(R.color.prussion_blue));
+
+        customTabsIntent.launchUrl(this, Uri.parse(postDetailUrl));
+    }
+
+    @OnClick(R.id.post_detail)
+    void post_detail() {
+        navigateToCustomChromeTabs("https://www.dicionariopopular.com/xablau/");
     }
 }

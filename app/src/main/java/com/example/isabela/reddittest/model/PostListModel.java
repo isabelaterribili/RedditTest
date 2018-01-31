@@ -11,25 +11,13 @@ import java.util.List;
 public class PostListModel {
 
     private String postListAfter;
-    private String postListBefore;
-    private List<PostModel> postModelData;
 
-    PostListModel(String postListAfter, String postListBefore, List<PostModel> postModelData) {
+    public PostListModel(String postListAfter) {
         this.postListAfter = postListAfter;
-        this.postListBefore = postListBefore;
-        this.postModelData = postModelData;
     }
 
     public String getPostListAfter() {
         return postListAfter;
-    }
-
-    public String getPostListBefore() {
-        return postListAfter;
-    }
-
-    public List<PostModel> getPostModelData() {
-        return postModelData;
     }
 
 }

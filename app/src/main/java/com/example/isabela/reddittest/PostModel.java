@@ -11,19 +11,15 @@ public class PostModel {
     private String postTitle;
     private String imagePostPath;
     private int postScore;
+    private String postId;
 
 
-    public PostModel(String postTitle, String imagePostPath, int postScore) {
+    public PostModel(String postTitle, String imagePostPath, int postScore, String postId) {
         this.postTitle = postTitle;
         this.imagePostPath = imagePostPath;
         this.postScore = postScore;
+        this.postId = postId;
     }
-
-    public PostModel(String postTitle, int postScore) {
-        this.postTitle = postTitle;
-        this.postScore = postScore;
-    }
-
 
     public String getPostTitle() {
         return postTitle;
@@ -38,8 +34,9 @@ public class PostModel {
         return imagePostPath;
     }
 
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
+    public String getPostId() {
+        return postId;
     }
+
 
 }
