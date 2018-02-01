@@ -1,9 +1,6 @@
 package com.example.isabela.reddittest.presentation;
 
 import android.content.Context;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.example.isabela.reddittest.ListPostsAdapter;
 import com.example.isabela.reddittest.Post;

@@ -13,14 +13,18 @@ import com.example.isabela.reddittest.R;
 
 public class PostCommentViewHolder extends RecyclerView.ViewHolder {
 
-    TextView postComment;
-    Context context;
+    private TextView postComment;
+    private Context context;
 
 
     public PostCommentViewHolder(Context context, View view) {
         super(view);
-        this.postComment = (TextView) view.findViewById(R.id.comment);
 
         this.context = context;
+        this.postComment = (TextView) view.findViewById(R.id.comment);
+    }
+
+    public void setModel(PostCommentModel postCommentModel) {
+        postComment.setText(postCommentModel.getCommentPost());
     }
 }
