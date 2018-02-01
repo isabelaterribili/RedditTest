@@ -1,6 +1,5 @@
 package com.example.isabela.reddittest.presentation;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
@@ -14,22 +13,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.isabela.reddittest.PostComment;
-import com.example.isabela.reddittest.PostListClient;
 import com.example.isabela.reddittest.R;
-import com.example.isabela.reddittest.postdetail.PostCommentAdapter;
+import com.example.isabela.reddittest.postdetail.ListCommentAdapter;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by isabela on 29/01/2018.
@@ -59,60 +51,40 @@ public class PostDetailActivity extends AppCompatActivity {
     private static final String POST_URL = "post_url";
     private static final String POST_URL_IMAGE = "post_url_image";
 
-    PostCommentAdapter postCommentAdapter;
+    private ListCommentAdapter listCommentAdapter;
+    private CommentListPostDetailPresenter commentListPostDetailPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getExtras();
+
+        setContentView(R.layout.activity_post_detail);
+        ButterKnife.bind(this);
+        setUpToolbar();
+
+        commentListPostDetailPresenter = new CommentListPostDetailPresenter(PostDetailActivity.this);
+
+        listCommentAdapter = new ListCommentAdapter(PostDetailActivity.this);
+
+        recyclerViewCommentCell.setAdapter(listCommentAdapter);
+
+        initRecyclerViewCellLayout(recyclerViewCommentCell);
+
+        commentListPostDetailPresenter.loadCommentPostList(listCommentAdapter, postId);
+
+        postDetailTitle.setText(postTitle);
+        loadPostImageDetail(postImageUrl);
+    }
+
+    public void getExtras() {
         postId = getIntent().getExtras().getString(POST_ID);
         postTitle = getIntent().getExtras().getString(POST_TITLE);
         postUrl = getIntent().getExtras().getString(POST_URL);
         postImageUrl = getIntent().getExtras().getString(POST_URL_IMAGE);
-
-
-                setContentView(R.layout.activity_post_detail);
-        ButterKnife.bind(this);
-        setUpToolbar();
-
-        postCommentAdapter = new PostCommentAdapter(PostDetailActivity.this);
-        recyclerViewCommentCell.setAdapter(postCommentAdapter);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-
-        recyclerViewCommentCell.setLayoutManager(linearLayoutManager);
-
-        DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-        recyclerViewCommentCell.addItemDecoration(recyclerViewDecoration);
-
-
-        postDetailTitle.setText(postTitle);
-        loadPostImageDetail(postImageUrl);
-
-        PostListClient postListClient = new PostListClient();
-
-        Observable<List<PostComment>> postCommentObservable = postListClient.initObservableComments(postId);
-
-        postCommentObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()) //TODO diposable
-                .subscribe(new Consumer<List<PostComment>>() {
-
-                    @Override
-                    public void accept(List<PostComment> postComments) throws Exception {
-                        List<String> list = new ArrayList<>();
-                        for (PostComment postComment : postComments) {
-                            list.addAll(postComment.getComments());
-                        }
-                        add(list);
-                    }
-                });
     }
-
-    public void add(List<String> postComments) {
-        postCommentAdapter.addComments(postComments);
-    }
-
 
     public void setUpToolbar() {
         setSupportActionBar(toolbar);
@@ -125,6 +97,18 @@ public class PostDetailActivity extends AppCompatActivity {
         });
     }
 
+    public void initRecyclerViewCellLayout(RecyclerView recyclerViewCommentCell) {
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+
+        recyclerViewCommentCell.setLayoutManager(linearLayoutManager);
+
+        DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
+        recyclerViewCommentCell.addItemDecoration(recyclerViewDecoration);
+
+    }
+
     public void navigateToCustomChromeTabs(String postDetailUrl) {
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = builder.build();
@@ -133,6 +117,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         customTabsIntent.launchUrl(this, Uri.parse(postDetailUrl));
     }
+
 
     @OnClick(R.id.post_detail)
     void post_detail() {

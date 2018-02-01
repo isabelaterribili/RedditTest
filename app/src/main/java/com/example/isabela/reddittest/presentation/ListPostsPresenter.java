@@ -25,17 +25,7 @@ public class ListPostsPresenter {
         this.context = context;
     }
 
-
-    public void loadPostList(RecyclerView recyclerViewPostCell, final ListPostsAdapter listPostsAdapter) {
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
-                LinearLayoutManager.VERTICAL, false);
-
-        recyclerViewPostCell.setLayoutManager(linearLayoutManager);
-
-        DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(context, LinearLayoutManager.VERTICAL);
-        recyclerViewPostCell.addItemDecoration(recyclerViewDecoration);
-
+    public void loadPostList(final ListPostsAdapter listPostsAdapter) {
 
         //TODO diposable
         PostListClient postListClient = new PostListClient();

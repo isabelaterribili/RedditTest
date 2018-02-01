@@ -15,12 +15,12 @@ import java.util.List;
  * Created by isabela on 30/01/2018.
  */
 
-public class PostCommentAdapter extends RecyclerView.Adapter {
+public class ListCommentAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private List<PostCommentModel> postCommentModelList = new ArrayList<>();
 
-    public PostCommentAdapter(Context context) {
+    public ListCommentAdapter(Context context) {
         this.context = context;
     }
 
