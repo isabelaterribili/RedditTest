@@ -106,7 +106,6 @@ public class PostDetailActivity extends AppCompatActivity {
 
         DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
         recyclerViewCommentCell.addItemDecoration(recyclerViewDecoration);
-
     }
 
     public void navigateToCustomChromeTabs(String postDetailUrl) {

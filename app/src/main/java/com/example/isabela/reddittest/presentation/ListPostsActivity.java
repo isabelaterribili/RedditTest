@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+
 import com.example.isabela.reddittest.ListPostsAdapter;
 import com.example.isabela.reddittest.R;
 

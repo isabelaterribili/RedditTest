@@ -11,9 +11,10 @@
         android:id="@+id/comment_cell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8sp">
+        android:paddingTop="2sp">
 
         <ImageView
+            android:id="@+id/comment_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -26,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="Roboto Regular"
             android:paddingLeft="56dp"
             android:textColor="@color/grey_dark"

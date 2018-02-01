@@ -12,6 +12,8 @@ import com.example.isabela.reddittest.model.PostModel;
 import com.example.isabela.reddittest.presentation.PostDetailActivity;
 import com.squareup.picasso.Picasso;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 /**
  * Created by isabela on 25/01/2018.
  */
@@ -31,10 +33,12 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private ImageView postThumbnail;
     private TextView postScore;
 
+
     PostViewHolder(Context context, View view) {
         super(view);
 
         this.context = context;
+
 
         this.postTitle = (TextView) view.findViewById(R.id.post_title);
         this.postThumbnail = (ImageView) view.findViewById(R.id.image_post);
@@ -60,7 +64,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Uri uri = Uri.parse(postModel.getPostThumbnail());
         Context context = postThumbnail.getContext();
 
-        Picasso.with(context).load(uri).into(postThumbnail);
+        Picasso.with(context).load(uri).transform(new RoundedCornersTransformation(10, 10)).into(postThumbnail);
 
         postScore.setText(context.getString(R.string.score) + postModel.getPostScore());
     }
