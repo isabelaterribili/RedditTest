@@ -28,23 +28,9 @@ public class PostCommentAdapter extends RecyclerView.Adapter {
 
     public void addComments(List<String> postComments) {
 
-//        List<String> list = new ArrayList<>();
-//        for(List<String> list: postComments) {
-//            list.addAll(postComment.getComments());
-//        }
-
-        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(0)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(1)));
-        postCommentModelList.add(new PostCommentModel(postComments.get(2)));
+        for(String comment: postComments) {
+            postCommentModelList.add(new PostCommentModel(comment));
+        }
 
         notifyDataSetChanged();
     }
