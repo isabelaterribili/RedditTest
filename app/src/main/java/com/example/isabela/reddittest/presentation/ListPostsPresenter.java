@@ -25,7 +25,7 @@ public class ListPostsPresenter {
     public void loadPostList(final ListPostsAdapter listPostsAdapter) {
 
         //TODO diposable
-        PostListClient postListClient = new PostListClient(context);
+        PostListClient postListClient = new PostListClient();
         Observable<Post> postObservable = postListClient.initObservable();
 
         postObservable

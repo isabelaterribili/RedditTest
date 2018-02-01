@@ -21,10 +21,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class UrlRetrofitBuilder {
 
-    private Context context;
-
-    public UrlRetrofitBuilder(Context context) {
-        this.context = context;
+    public UrlRetrofitBuilder() {
     }
 
     private static final String BASE_URL = "https://www.reddit.com/";
