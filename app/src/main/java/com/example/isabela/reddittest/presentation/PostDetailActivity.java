@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 
 /**
@@ -37,6 +38,9 @@ public class PostDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.post_detail_title)
     TextView postDetailTitle;
+
+    @BindView(R.id.post_detail_url)
+    TextView postDetailUrl;
 
     @BindView(R.id.post_image_detail)
     ImageView postImageDetail;
@@ -76,6 +80,7 @@ public class PostDetailActivity extends AppCompatActivity {
         commentListPostDetailPresenter.loadCommentPostList(listCommentAdapter, postId);
 
         postDetailTitle.setText(postTitle);
+        postDetailUrl.setText(postUrl);
         loadPostImageDetail(postImageUrl);
     }
 
@@ -126,6 +131,13 @@ public class PostDetailActivity extends AppCompatActivity {
     public void loadPostImageDetail(String postImageUrl) {
         Uri uri = Uri.parse(postImageUrl);
 
-        Picasso.with(this).load(uri).into(postImageDetail);
+        Picasso.with(this)
+                .load(uri)
+                .transform(new RoundedCornersTransformation(10, 10))
+                .resize(300, 300)
+                .centerCrop()
+                .placeholder(R.drawable.ic_post_placeholder)
+                .error(R.drawable.ic_post_placeholder)
+                .into(postImageDetail);
     }
 }

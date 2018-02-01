@@ -68,7 +68,7 @@ public class Post {
             if(dataPost.imagePreview != null && dataPost.imagePreview.imageSize.size() > 0) {
                 return dataPost.imagePreview.imageSize.get(0).imageSource.url;
             }
-            return "https://api.partio.com.br/images/flavio-schiavini-abe-210x210x-af2e7.jpg";
+            return "";
         }
     }
 

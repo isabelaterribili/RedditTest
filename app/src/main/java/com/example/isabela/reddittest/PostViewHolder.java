@@ -64,7 +64,15 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Uri uri = Uri.parse(postModel.getPostThumbnail());
         Context context = postThumbnail.getContext();
 
-        Picasso.with(context).load(uri).transform(new RoundedCornersTransformation(10, 10)).into(postThumbnail);
+        Picasso.with(context)
+                .load(uri)
+                .transform(new RoundedCornersTransformation(10, 10))
+                .resize(150, 150)
+                .centerCrop()
+                .placeholder(R.drawable.ic_post_placeholder)
+                .error(R.drawable.ic_post_placeholder)
+                .into(postThumbnail);
+
 
         postScore.setText(context.getString(R.string.score) + postModel.getPostScore());
     }

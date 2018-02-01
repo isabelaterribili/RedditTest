@@ -1,6 +1,9 @@
 package com.example.isabela.reddittest;
 
+import android.content.Context;
+
 import io.reactivex.Scheduler;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -13,11 +16,23 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class UrlRetrofitBuilder {
+
+    private Context context;
+
+    public UrlRetrofitBuilder(Context context) {
+        this.context = context;
+    }
+
     private static final String BASE_URL = "https://www.reddit.com/";
+
+    OkHttpClient client = new OkHttpClient.Builder()
+            .addInterceptor(new ConnectivityInterceptor(context))
+            .build();
 
     public Retrofit createUrl() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

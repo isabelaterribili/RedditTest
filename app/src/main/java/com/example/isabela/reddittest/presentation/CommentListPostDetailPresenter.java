@@ -34,7 +34,7 @@ public class CommentListPostDetailPresenter {
 
     public void loadCommentPostList(final ListCommentAdapter listCommentAdapter, String postId) {
 
-        PostListClient postListClient = new PostListClient();
+        PostListClient postListClient = new PostListClient(context);
 
         Observable<List<PostComment>> postCommentObservable = postListClient.initObservableComments(postId);
 
