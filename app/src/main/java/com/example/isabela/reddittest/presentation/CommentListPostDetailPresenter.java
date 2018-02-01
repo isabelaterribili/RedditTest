@@ -25,12 +25,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CommentListPostDetailPresenter {
 
-
-    Context context;
-
     public CommentListPostDetailPresenter(Context context) {
         this.context = context;
     }
+
+    Context context;
+
 
     public void loadCommentPostList(final ListCommentAdapter listCommentAdapter, String postId) {
 
