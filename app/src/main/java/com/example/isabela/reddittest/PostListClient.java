@@ -8,7 +8,7 @@ import retrofit2.Retrofit;
 public class PostListClient {
 
     public Observable<Post> initObservable() {
-        Retrofit urlRetrofitBuilder = new UrlRetrofitBuilder().createUrl();
+        Retrofit urlRetrofitBuilder = new UrlRetrofitBuilder().createUrl(); //TODO extrair para método
 
         RedditAndroidService redditAndroidService = urlRetrofitBuilder.create(RedditAndroidService.class);
 

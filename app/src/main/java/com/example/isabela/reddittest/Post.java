@@ -15,6 +15,10 @@ public class Post {
         this.dataList = dataList;
     }
 
+    public Post() {
+
+    }
+
     @SerializedName("kind")
     String kind;
 
@@ -51,8 +55,13 @@ public class Post {
         public int getPostScore() {
             return dataPost.postScore;
         }
+
         public String getPostId() {
             return dataPost.postId;
+        }
+
+        public String getPostUrl() {
+            return dataPost.urlPost;
         }
     }
 

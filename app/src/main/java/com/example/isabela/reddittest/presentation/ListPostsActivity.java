@@ -2,22 +2,14 @@ package com.example.isabela.reddittest.presentation;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.example.isabela.reddittest.ListPostsAdapter;
-import com.example.isabela.reddittest.Post;
-import com.example.isabela.reddittest.PostListClient;
 import com.example.isabela.reddittest.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class ListPostsActivity extends AppCompatActivity {
@@ -27,6 +19,8 @@ public class ListPostsActivity extends AppCompatActivity {
 
     ListPostsAdapter listPostsAdapter;
 
+    private ListPostsPresenter listPostsPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,34 +29,13 @@ public class ListPostsActivity extends AppCompatActivity {
 
         setUpToolbar();
 
+        listPostsPresenter = new ListPostsPresenter(ListPostsActivity.this);
+
         listPostsAdapter = new ListPostsAdapter(ListPostsActivity.this);
+
         recyclerViewPostCell.setAdapter(listPostsAdapter);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-
-        recyclerViewPostCell.setLayoutManager(linearLayoutManager);
-
-        DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL);
-        recyclerViewPostCell.addItemDecoration(recyclerViewDecoration);
-
-        //TODO diposable
-        PostListClient postListClient = new PostListClient();
-        Observable<Post> postObservable = postListClient.initObservable();
-
-        postObservable
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Post>() {
-                    @Override
-                    public void accept(Post post) throws Exception {
-                        add(post);
-                    }
-                });
-    }
-
-    private void add(Post post) {
-        listPostsAdapter.addToPostList(post);
+        listPostsPresenter.loadPostList(recyclerViewPostCell, listPostsAdapter);
     }
 
     @Override

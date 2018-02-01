@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.isabela.reddittest.model.PostListModel;
+import com.example.isabela.reddittest.model.PostModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,7 +35,12 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
         postModelListInfo = new PostListModel(post.getPostAfterId());
 
         for (Post.Child child : post.getChildrenList()) {
-            listPostModel.add(new PostModel(child.getPostTitle(), child.getThumbnailImage(), child.getPostScore(), child.getPostId()));
+            listPostModel.add(new PostModel(
+                    child.getPostTitle(),
+                    child.getThumbnailImage(),
+                    child.getPostScore(),
+                    child.getPostId(),
+                    child.getPostUrl()));
         }
         notifyDataSetChanged();
     }
@@ -55,16 +61,7 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
 
         PostModel postModel = listPostModel.get(position);
 
-        listPostModel.get(position).getPostId();
-
-        postViewHolder.postScore.setText(context.getString(R.string.score) + postModel.getPostScore());
-        postViewHolder.postTitle.setText(postModel.getPostTitle());
-//        postViewHolder.postId.
-
-        Uri uri = Uri.parse(postModel.getImagePostPath());
-        Context context = ((PostViewHolder) viewHolder).postPathImage.getContext();
-
-        Picasso.with(context).load(uri).into(((PostViewHolder) viewHolder).postPathImage);
+        postViewHolder.setModel(postModel);
     }
 
     @Override

@@ -1,9 +1,5 @@
 package com.example.isabela.reddittest.model;
 
-import com.example.isabela.reddittest.PostModel;
-
-import java.util.List;
-
 /**
  * Created by isabela on 29/01/2018.
  */
@@ -19,5 +15,4 @@ public class PostListModel {
     public String getPostListAfter() {
         return postListAfter;
     }
-
 }

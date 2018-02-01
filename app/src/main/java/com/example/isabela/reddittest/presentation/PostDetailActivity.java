@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.isabela.reddittest.PostComment;
@@ -43,15 +42,14 @@ public class PostDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.post_detail_title)
     TextView postDetailTitle;
-//
-//    @BindView(R.id.post_detail)
-//    LinearLayout postDetailItem;
 
-    String postDetailUrl;
-
-    String postId = "7ub1k4";
+    String postId;
+    String postTitle;
+    String postUrl;
 
     private static final String POST_ID = "post_id";
+    private static final String POST_TITLE = "post_title";
+    private static final String POST_URL = "post_url";
 
     PostCommentAdapter postCommentAdapter;
 
@@ -59,11 +57,13 @@ public class PostDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getIntent().getExtras().getString(POST_ID);
+        postId = getIntent().getExtras().getString(POST_ID);
+        postTitle = getIntent().getExtras().getString(POST_TITLE);
+        postUrl = getIntent().getExtras().getString(POST_URL);
+
 
         setContentView(R.layout.activity_post_detail);
         ButterKnife.bind(this);
-
         setUpToolbar();
 
         postCommentAdapter = new PostCommentAdapter(PostDetailActivity.this);
@@ -79,7 +79,7 @@ public class PostDetailActivity extends AppCompatActivity {
         recyclerViewCommentCell.addItemDecoration(recyclerViewDecoration);
 
 
-        postDetailTitle.setText("How common are illnesses such as the cold or the flu in other animals? and if they aren't common, why?");
+        postDetailTitle.setText(postTitle);
 
         PostListClient postListClient = new PostListClient();
 
@@ -127,6 +127,6 @@ public class PostDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.post_detail)
     void post_detail() {
-        navigateToCustomChromeTabs("https://www.dicionariopopular.com/xablau/");
+        navigateToCustomChromeTabs(postUrl);
     }
 }
