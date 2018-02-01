@@ -1,7 +1,5 @@
 package com.example.isabela.reddittest.model;
 
-import android.net.Uri;
-
 /**
  * Created by isabela on 25/01/2018.
  */
@@ -9,18 +7,21 @@ import android.net.Uri;
 public class PostModel {
 
     private String postTitle;
-    private String imagePostPath;
+    private String postThumbnail;
     private int postScore;
+
     private String postId;
     private String postUrl;
+    private String postImage;
 
 
-    public PostModel(String postTitle, String imagePostPath, int postScore, String postId, String postUrl) {
+    public PostModel(String postTitle, String postThumbnail, int postScore, String postId, String postUrl, String postImage) {
         this.postTitle = postTitle;
-        this.imagePostPath = imagePostPath;
+        this.postThumbnail = postThumbnail;
         this.postScore = postScore;
         this.postId = postId;
         this.postUrl = postUrl;
+        this.postImage = postImage;
     }
 
     public String getPostTitle() {
@@ -31,8 +32,8 @@ public class PostModel {
         return Integer.toString(postScore);
     }
 
-    public String getImagePostPath() {
-        return imagePostPath;
+    public String getPostThumbnail() {
+        return postThumbnail;
     }
 
     public String getPostId() {
@@ -41,5 +42,9 @@ public class PostModel {
 
     public String getPostUrl() {
         return postUrl;
+    }
+
+    public String getPostImage() {
+        return postImage;
     }
 }

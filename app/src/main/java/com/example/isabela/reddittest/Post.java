@@ -63,6 +63,13 @@ public class Post {
         public String getPostUrl() {
             return dataPost.urlPost;
         }
+
+        public String getImageResolution() {
+            if(dataPost.imagePreview != null && dataPost.imagePreview.imageSize.size() > 0) {
+                return dataPost.imagePreview.imageSize.get(0).imageSource.url;
+            }
+            return "https://api.partio.com.br/images/flavio-schiavini-abe-210x210x-af2e7.jpg";
+        }
     }
 
     public class DataPost {
@@ -101,8 +108,8 @@ public class Post {
         @SerializedName("resolutions")
         List<ImageResolutions> imageResolutions;
 
-        @SerializedName("url")   //devolve o tamanho de imagem padrão
-                String url;
+        @SerializedName("url") //padrão do reddit
+        String url;
 
         @SerializedName("width")
         int width;
