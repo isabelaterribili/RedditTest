@@ -29,7 +29,7 @@ public class UrlRetrofitBuilder {
     public Retrofit createUrl() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(provideOkHttpClient())
+//                .client(provideOkHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

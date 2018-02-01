@@ -39,7 +39,29 @@ public class ListPostsPresenter {
                 });
     }
 
+    public void loadNextPostList(final ListPostsAdapter listPostsAdapter, final int childCount, final int totalItemsCount) {
+
+        //TODO diposable
+        PostListClient postListClient = new PostListClient();
+        Observable<Post> postObservable = postListClient.initObservableNextPage(listPostsAdapter.getPostAfterId());
+
+        postObservable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Post>() {
+                    @Override
+                    public void accept(Post post) throws Exception {
+                        append(post, listPostsAdapter, childCount, totalItemsCount);
+//                        post.getChildrenList();
+                    }
+                });
+    }
+
     private void add(Post post, ListPostsAdapter listPostsAdapter) {
         listPostsAdapter.addToPostList(post);
+    }
+
+    private void append(Post post, ListPostsAdapter listPostsAdapter, int childCount, int totalItemsCount) {
+        listPostsAdapter.append(post, childCount, totalItemsCount);
     }
 }

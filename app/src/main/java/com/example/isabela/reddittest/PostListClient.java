@@ -19,6 +19,12 @@ public class PostListClient {
         return postCommentObservable;
     }
 
+    public Observable<Post> initObservableNextPage(String afterId) {
+        Observable<Post> postObservable = createRedditAndroidService().getNextPage(afterId);
+
+        return postObservable;
+    }
+
 
     public RedditAndroidService createRedditAndroidService() {
         Retrofit urlRetrofitBuilder = new UrlRetrofitBuilder().createUrl();

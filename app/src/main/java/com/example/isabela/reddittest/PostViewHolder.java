@@ -39,7 +39,6 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         this.context = context;
 
-
         this.postTitle = (TextView) view.findViewById(R.id.post_title);
         this.postThumbnail = (ImageView) view.findViewById(R.id.image_post);
         this.postScore = (TextView) view.findViewById(R.id.score);

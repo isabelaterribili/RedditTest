@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 
+import com.example.isabela.reddittest.EndLessRecyclerViewScrollListener;
 import com.example.isabela.reddittest.ListPostsAdapter;
 import com.example.isabela.reddittest.R;
 
@@ -23,6 +24,9 @@ public class ListPostsActivity extends AppCompatActivity {
     ListPostsAdapter listPostsAdapter;
 
     private ListPostsPresenter listPostsPresenter;
+
+    private EndLessRecyclerViewScrollListener scrollListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,19 @@ public class ListPostsActivity extends AppCompatActivity {
         DividerItemDecoration recyclerViewDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
         recyclerViewPostCell.addItemDecoration(recyclerViewDecoration);
 
+
+        scrollListener = new EndLessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                callNextPage(view.getChildCount(), totalItemsCount);
+//                listPostsPresenter.loadNextPostList(listPostsAdapter, totalItemsCount);
+            }
+        };
+        recyclerViewPostCell.addOnScrollListener(scrollListener);
+    }
+
+    public void callNextPage(int childCount, int totalItemsCount) {
+        listPostsPresenter.loadNextPostList(listPostsAdapter, childCount, totalItemsCount);
     }
 }
 

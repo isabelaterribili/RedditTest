@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.isabela.reddittest.model.PostListModel;
 import com.example.isabela.reddittest.model.PostModel;
 
 import java.util.ArrayList;
@@ -19,18 +18,18 @@ import java.util.List;
 
 public class ListPostsAdapter extends RecyclerView.Adapter {
 
+    private Context context;
+
     private List<PostModel> listPostModel = new ArrayList<>();
 
-    private PostListModel postModelListInfo;
-
-    private Context context;
+    private String postAfterId;
 
     public ListPostsAdapter(Context context) {
         this.context = context;
     }
 
     public void addToPostList(Post post) {
-        postModelListInfo = new PostListModel(post.getPostAfterId());
+        this.postAfterId = post.getPostAfterId();
 
         for (Post.Child child : post.getChildrenList()) {
             listPostModel.add(new PostModel(
@@ -42,6 +41,25 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
                     child.getImageResolution()));
         }
         notifyDataSetChanged();
+    }
+
+    public void append(Post post, int childCount, int totalItemsCount) {
+        this.postAfterId = post.getPostAfterId();
+
+        for (Post.Child child : post.getChildrenList()) {
+            listPostModel.add(new PostModel(
+                    child.getPostTitle(),
+                    child.getThumbnailImage(),
+                    child.getPostScore(),
+                    child.getPostId(),
+                    child.getPostUrl(),
+                    child.getImageResolution()));
+        }
+        notifyItemRangeInserted(listPostModel.size() - post.getChildrenList().size(), totalItemsCount);
+    }
+
+    public String getPostAfterId() {
+        return postAfterId;
     }
 
     @Override
