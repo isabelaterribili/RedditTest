@@ -1,7 +1,10 @@
 package com.example.isabela.reddittest.presentation.presenter;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
+import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.client.DisposableManager;
 import com.example.isabela.reddittest.client.model.PostListing;
 import com.example.isabela.reddittest.client.PostListClient;
@@ -22,11 +25,11 @@ public class ListPostsPresenter {
         this.context = context;
     }
 
-    public void loadPostList(final ListPostsAdapter listPostsAdapter) {
+    public void loadPostList(final ListPostsAdapter listPostsAdapter, final View view) {
 
         //TODO diposable
         PostListClient postListClient = new PostListClient();
-        Observable<PostListing> postObservable = postListClient.initObservable();
+        Observable<PostListing> postObservable = postListClient.getListPost();
 
         postObservable
                 .subscribeOn(Schedulers.newThread())
@@ -44,7 +47,7 @@ public class ListPostsPresenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        showSnackBar(view);
                     }
 
                     @Override
@@ -54,11 +57,11 @@ public class ListPostsPresenter {
                 });
     }
 
-    public void loadNextPostList(final ListPostsAdapter listPostsAdapter, final int totalItemsCount) {
+    public void loadNextPostList(final ListPostsAdapter listPostsAdapter, final int totalItemsCount, final View view) {
 
         //TODO diposable
         PostListClient postListClient = new PostListClient();
-        Observable<PostListing> postObservable = postListClient.initObservableNextPage(listPostsAdapter.getPostAfterId());
+        Observable<PostListing> postObservable = postListClient.getNextPagePostList(listPostsAdapter.getPostAfterId());
 
         postObservable
                 .subscribeOn(Schedulers.newThread())
@@ -76,7 +79,7 @@ public class ListPostsPresenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        showSnackBar(view);
                     }
 
                     @Override
@@ -92,5 +95,9 @@ public class ListPostsPresenter {
 
     private void append(PostListing postListing, ListPostsAdapter listPostsAdapter, int totalItemsCount) {
         listPostsAdapter.appendOnPostList(postListing, totalItemsCount);
+    }
+
+    private void showSnackBar(View view) {
+        Snackbar.make(view, R.string.no_connection_message, Snackbar.LENGTH_SHORT).show();
     }
 }

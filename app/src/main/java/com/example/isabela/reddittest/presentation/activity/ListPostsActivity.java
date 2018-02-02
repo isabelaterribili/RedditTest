@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 
 import com.example.isabela.reddittest.R;
@@ -52,7 +53,8 @@ public class ListPostsActivity extends AppCompatActivity {
 
         initRecyclerViewPostCellLayout(recyclerViewPostCell);
 
-        listPostsPresenter.loadPostList(listPostsAdapter);
+
+        listPostsPresenter.loadPostList(listPostsAdapter, getView());
     }
 
     public void setUpToolbar() {
@@ -82,7 +84,7 @@ public class ListPostsActivity extends AppCompatActivity {
     }
 
     public void callNextPage(int totalItemsCount) {
-        listPostsPresenter.loadNextPostList(listPostsAdapter, totalItemsCount);
+        listPostsPresenter.loadNextPostList(listPostsAdapter, totalItemsCount, getView());
     }
 
     public void pullToRefresh() {
@@ -97,11 +99,16 @@ public class ListPostsActivity extends AppCompatActivity {
 
                 scrollListener.resetState();
 
-                listPostsPresenter.loadPostList(listPostsAdapter);
+                listPostsPresenter.loadPostList(listPostsAdapter, getView());
 
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    public View getView() {
+        View view = findViewById(R.id.activity_list_posts);
+        return view;
     }
 
     @Override

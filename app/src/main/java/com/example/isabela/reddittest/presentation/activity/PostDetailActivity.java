@@ -66,6 +66,7 @@ public class PostDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setUpToolbar();
 
+
         commentListPresenter = new CommentListPresenter(PostDetailActivity.this);
 
         listCommentAdapter = new ListCommentAdapter(PostDetailActivity.this);
@@ -74,7 +75,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         initRecyclerViewCellLayout(recyclerViewCommentCell);
 
-        commentListPresenter.loadCommentPostList(listCommentAdapter, postId);
+        commentListPresenter.loadCommentPostList(listCommentAdapter, postId, getView());
 
         postDetailTitle.setText(postTitle);
         postDetailUrl.setText(postUrl);
@@ -137,6 +138,12 @@ public class PostDetailActivity extends AppCompatActivity {
                 .error(R.drawable.ic_post_placeholder)
                 .into(postImageDetail);
     }
+
+    private View getView() {
+        View view = findViewById(R.id.activity_post_detail);
+        return view;
+    }
+
 
     @Override
     public void onDestroy() {

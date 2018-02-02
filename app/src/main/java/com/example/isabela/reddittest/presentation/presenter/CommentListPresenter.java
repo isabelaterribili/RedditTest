@@ -1,7 +1,10 @@
 package com.example.isabela.reddittest.presentation.presenter;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
+import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.client.DisposableManager;
 import com.example.isabela.reddittest.client.model.CommentListing;
 import com.example.isabela.reddittest.client.PostListClient;
@@ -25,11 +28,11 @@ public class CommentListPresenter {
         this.context = context;
     }
 
-    public void loadCommentPostList(final ListCommentAdapter listCommentAdapter, String postId) {
+    public void loadCommentPostList(final ListCommentAdapter listCommentAdapter, String postId, final View view) {
 
         PostListClient postListClient = new PostListClient();
 
-        Observable<List<CommentListing>> postCommentObservable = postListClient.initObservableComments(postId);
+        Observable<List<CommentListing>> postCommentObservable = postListClient.getListComments(postId);
 
         postCommentObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()) //TODO diposable
@@ -51,7 +54,7 @@ public class CommentListPresenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        Snackbar.make(view, R.string.no_connection_message, Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override

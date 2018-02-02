@@ -2,4 +2,5 @@
     <string name="app_name">RedditTest</string>
     <string name="list_title">Reddit</string>
     <string name="score">"score: "</string>
+    <string name="no_connection_message">Rede indisponível</string>
 </resources>

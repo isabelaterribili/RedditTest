@@ -11,30 +11,24 @@ import retrofit2.Retrofit;
 
 public class PostListClient {
 
-    public Observable<PostListing> initObservable() {
-        Observable<PostListing> postObservable = createRedditAndroidService().listPosts();
+    public Observable<PostListing> getListPost() {
 
-        return postObservable;
+        return createRedditAndroidService().listPosts();
     }
 
-    public Observable<List<CommentListing>> initObservableComments(String postId) {
-        Observable<List<CommentListing>> postCommentObservable = createRedditAndroidService().listComments(postId);
+    public Observable<List<CommentListing>> getListComments(String postId) {
 
-        return postCommentObservable;
+        return createRedditAndroidService().listComments(postId);
     }
 
-    public Observable<PostListing> initObservableNextPage(String afterId) {
-        Observable<PostListing> postObservable = createRedditAndroidService().getNextPage(afterId);
+    public Observable<PostListing> getNextPagePostList(String afterId) {
 
-        return postObservable;
+        return createRedditAndroidService().getNextPage(afterId);
     }
-
 
     private RedditAndroidService createRedditAndroidService() {
         Retrofit retrofit = new RetrofitFactory().build();
 
-        RedditAndroidService redditAndroidService = retrofit.create(RedditAndroidService.class);
-
-        return redditAndroidService;
+        return retrofit.create(RedditAndroidService.class);
     }
 }
