@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.isabela.reddittest.R;
+import com.example.isabela.reddittest.client.DisposableManager;
 import com.example.isabela.reddittest.presentation.adapter.ListCommentAdapter;
 import com.example.isabela.reddittest.presentation.presenter.CommentListPresenter;
 import com.squareup.picasso.Picasso;
@@ -135,5 +136,11 @@ public class PostDetailActivity extends AppCompatActivity {
                 .placeholder(R.drawable.ic_post_placeholder)
                 .error(R.drawable.ic_post_placeholder)
                 .into(postImageDetail);
+    }
+
+    @Override
+    public void onDestroy() {
+        DisposableManager.dispose();
+        super.onDestroy();
     }
 }

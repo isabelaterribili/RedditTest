@@ -2,6 +2,7 @@ package com.example.isabela.reddittest.presentation.presenter;
 
 import android.content.Context;
 
+import com.example.isabela.reddittest.client.DisposableManager;
 import com.example.isabela.reddittest.client.model.CommentListing;
 import com.example.isabela.reddittest.client.PostListClient;
 import com.example.isabela.reddittest.presentation.adapter.ListCommentAdapter;
@@ -35,8 +36,8 @@ public class CommentListPresenter {
                 .subscribe(new Observer<List<CommentListing>>() {
 
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        DisposableManager.add(disposable);
                     }
 
                     @Override

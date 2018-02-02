@@ -2,6 +2,7 @@ package com.example.isabela.reddittest.presentation.presenter;
 
 import android.content.Context;
 
+import com.example.isabela.reddittest.client.DisposableManager;
 import com.example.isabela.reddittest.client.model.PostListing;
 import com.example.isabela.reddittest.client.PostListClient;
 import com.example.isabela.reddittest.presentation.adapter.ListPostsAdapter;
@@ -32,8 +33,8 @@ public class ListPostsPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PostListing>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        DisposableManager.add(disposable);
                     }
 
                     @Override
@@ -64,8 +65,8 @@ public class ListPostsPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PostListing>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        DisposableManager.add(disposable);
                     }
 
                     @Override

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 
 import com.example.isabela.reddittest.R;
+import com.example.isabela.reddittest.client.DisposableManager;
 import com.example.isabela.reddittest.presentation.EndLessRecyclerViewScrollListener;
 import com.example.isabela.reddittest.presentation.adapter.ListPostsAdapter;
 import com.example.isabela.reddittest.presentation.presenter.ListPostsPresenter;
@@ -48,12 +49,6 @@ public class ListPostsActivity extends AppCompatActivity {
         listPostsPresenter.loadPostList(listPostsAdapter);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        clear disposable
-    }
-
     public void setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.drawable.ic_reddit_white);
@@ -82,6 +77,12 @@ public class ListPostsActivity extends AppCompatActivity {
 
     public void callNextPage(int totalItemsCount) {
         listPostsPresenter.loadNextPostList(listPostsAdapter, totalItemsCount);
+    }
+
+    @Override
+    public void onDestroy() {
+        DisposableManager.dispose();
+        super.onDestroy();
     }
 }
 
