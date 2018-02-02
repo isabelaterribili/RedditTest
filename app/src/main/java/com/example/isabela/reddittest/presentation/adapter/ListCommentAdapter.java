@@ -1,4 +1,4 @@
-package com.example.isabela.reddittest.postdetail;
+package com.example.isabela.reddittest.presentation.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,18 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.isabela.reddittest.R;
+import com.example.isabela.reddittest.model.CommentModel;
+import com.example.isabela.reddittest.presentation.viewholder.CommentViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by isabela on 30/01/2018.
- */
-
 public class ListCommentAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<PostCommentModel> postCommentModelList = new ArrayList<>();
+    private List<CommentModel> commentModelList = new ArrayList<>();
 
     public ListCommentAdapter(Context context) {
         this.context = context;
@@ -28,7 +26,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter {
     public void addComments(List<String> postComments) {
 
         for (String comment : postComments) {
-            postCommentModelList.add(new PostCommentModel(comment));
+            commentModelList.add(new CommentModel(comment));
         }
 
         notifyDataSetChanged();
@@ -38,23 +36,23 @@ public class ListCommentAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.comment_row_item, parent, false);
 
-        PostCommentViewHolder postCommentViewHolder = new PostCommentViewHolder(context, view);
+        CommentViewHolder commentViewHolder = new CommentViewHolder(context, view);
 
-        return postCommentViewHolder;
+        return commentViewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
-        PostCommentViewHolder postViewHolder = (PostCommentViewHolder) viewHolder;
+        CommentViewHolder postViewHolder = (CommentViewHolder) viewHolder;
 
-        PostCommentModel postCommentModel = postCommentModelList.get(position);
+        CommentModel commentModel = commentModelList.get(position);
 
-        postViewHolder.bind(postCommentModel);
+        postViewHolder.bind(commentModel);
     }
 
     @Override
     public int getItemCount() {
-        return postCommentModelList.size();
+        return commentModelList.size();
     }
 }

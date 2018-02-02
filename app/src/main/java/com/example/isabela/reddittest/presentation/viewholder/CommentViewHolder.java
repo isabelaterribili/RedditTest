@@ -1,4 +1,4 @@
-package com.example.isabela.reddittest.postdetail;
+package com.example.isabela.reddittest.presentation.viewholder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,28 +7,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.isabela.reddittest.R;
+import com.example.isabela.reddittest.model.CommentModel;
 
-/**
- * Created by isabela on 30/01/2018.
- */
-
-public class PostCommentViewHolder extends RecyclerView.ViewHolder {
+public class CommentViewHolder extends RecyclerView.ViewHolder {
 
     private Context context;
-    private TextView postComment;
+    private TextView commentText;
     private ImageView imagePostDetail;
 
-
-    public PostCommentViewHolder(Context context, View view) {
+    public CommentViewHolder(Context context, View view) {
         super(view);
 
         this.context = context;
-        this.postComment = (TextView) view.findViewById(R.id.comment);
+        this.commentText = (TextView) view.findViewById(R.id.comment);
         this.imagePostDetail = (ImageView) view.findViewById(R.id.comment_placeholder);
     }
 
-    public void bind(PostCommentModel postCommentModel) {
-        postComment.setText(postCommentModel.getCommentPost());
+    public void bind(CommentModel commentModel) {
+        commentText.setText(commentModel.getCommentPost());
         imagePostDetail.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_icon_reddit_comment));
     }
 }

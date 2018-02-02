@@ -1,4 +1,4 @@
-package com.example.isabela.reddittest.presentation;
+package com.example.isabela.reddittest.presentation.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,9 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 
-import com.example.isabela.reddittest.EndLessRecyclerViewScrollListener;
-import com.example.isabela.reddittest.ListPostsAdapter;
 import com.example.isabela.reddittest.R;
+import com.example.isabela.reddittest.presentation.EndLessRecyclerViewScrollListener;
+import com.example.isabela.reddittest.presentation.adapter.ListPostsAdapter;
+import com.example.isabela.reddittest.presentation.presenter.ListPostsPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +22,7 @@ public class ListPostsActivity extends AppCompatActivity {
     @BindView(R.id.post_recycler_view_cell)
     RecyclerView recyclerViewPostCell;
 
-    ListPostsAdapter listPostsAdapter;
+    private ListPostsAdapter listPostsAdapter;
 
     private ListPostsPresenter listPostsPresenter;
 

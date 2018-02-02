@@ -1,14 +1,14 @@
-package com.example.isabela.reddittest.postdetail;
+package com.example.isabela.reddittest.model;
 
 /**
  * Created by isabela on 30/01/2018.
  */
 
-public class PostCommentModel {
+public class CommentModel {
 
     private String commentPost;
 
-    public PostCommentModel(String commentPost) {
+    public CommentModel(String commentPost) {
         this.commentPost = commentPost;
     }
 

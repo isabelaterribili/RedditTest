@@ -1,4 +1,4 @@
-package com.example.isabela.reddittest;
+package com.example.isabela.reddittest.presentation.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,32 +6,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.isabela.reddittest.R;
+import com.example.isabela.reddittest.client.model.PostListing;
 import com.example.isabela.reddittest.model.PostModel;
+import com.example.isabela.reddittest.presentation.viewholder.PostViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Created by isabela on 25/01/2018.
- */
-
 public class ListPostsAdapter extends RecyclerView.Adapter {
 
     private Context context;
-
-    private List<PostModel> listPostModel = new ArrayList<>();
-
     private String postAfterId;
+    private List<PostModel> listPostModel = new ArrayList<>();
 
     public ListPostsAdapter(Context context) {
         this.context = context;
     }
 
-    public void addToPostList(Post post) {
-        this.postAfterId = post.getPostAfterId();
+    public void addToPostList(PostListing postListing) {
+        this.postAfterId = postListing.getAfterId();
 
-        for (Post.Child child : post.getChildrenList()) {
+        for (PostListing.Child child : postListing.getChildrenList()) {
             listPostModel.add(new PostModel(
                     child.getPostTitle(),
                     child.getThumbnailImage(),
@@ -43,10 +39,10 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void appendOnPostList(Post post, int totalItemsCount) {
-        this.postAfterId = post.getPostAfterId();
+    public void appendOnPostList(PostListing postListing, int totalItemsCount) {
+        this.postAfterId = postListing.getAfterId();
 
-        for (Post.Child child : post.getChildrenList()) {
+        for (PostListing.Child child : postListing.getChildrenList()) {
             listPostModel.add(new PostModel(
                     child.getPostTitle(),
                     child.getThumbnailImage(),
@@ -55,7 +51,7 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
                     child.getPostUrl(),
                     child.getImageResolution()));
         }
-        notifyItemRangeInserted(listPostModel.size() - post.getChildrenList().size(), totalItemsCount);
+        notifyItemRangeInserted(listPostModel.size() - postListing.getChildrenList().size(), totalItemsCount);
     }
 
     public String getPostAfterId() {

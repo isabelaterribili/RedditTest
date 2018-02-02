@@ -1,25 +1,21 @@
-package com.example.isabela.reddittest.presentation;
+package com.example.isabela.reddittest.presentation.presenter;
 
 import android.content.Context;
 
-import com.example.isabela.reddittest.ListPostsAdapter;
-import com.example.isabela.reddittest.Post;
-import com.example.isabela.reddittest.PostListClient;
+import com.example.isabela.reddittest.client.model.PostListing;
+import com.example.isabela.reddittest.client.PostListClient;
+import com.example.isabela.reddittest.presentation.adapter.ListPostsAdapter;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by isabela on 31/01/2018.
- */
-
 public class ListPostsPresenter {
-    Context context;
+
+    private Context context;
 
     public ListPostsPresenter(Context context) {
         this.context = context;
@@ -29,20 +25,20 @@ public class ListPostsPresenter {
 
         //TODO diposable
         PostListClient postListClient = new PostListClient();
-        Observable<Post> postObservable = postListClient.initObservable();
+        Observable<PostListing> postObservable = postListClient.initObservable();
 
         postObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Post>() {
+                .subscribe(new Observer<PostListing>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull Post post) {
-                        add(post, listPostsAdapter);
+                    public void onNext(@NonNull PostListing postListing) {
+                        add(postListing, listPostsAdapter);
                     }
 
                     @Override
@@ -61,20 +57,20 @@ public class ListPostsPresenter {
 
         //TODO diposable
         PostListClient postListClient = new PostListClient();
-        Observable<Post> postObservable = postListClient.initObservableNextPage(listPostsAdapter.getPostAfterId());
+        Observable<PostListing> postObservable = postListClient.initObservableNextPage(listPostsAdapter.getPostAfterId());
 
         postObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Post>() {
+                .subscribe(new Observer<PostListing>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull Post post) {
-                        append(post, listPostsAdapter, totalItemsCount);
+                    public void onNext(@NonNull PostListing postListing) {
+                        append(postListing, listPostsAdapter, totalItemsCount);
                     }
 
                     @Override
@@ -89,11 +85,11 @@ public class ListPostsPresenter {
                 });
     }
 
-    private void add(Post post, ListPostsAdapter listPostsAdapter) {
-        listPostsAdapter.addToPostList(post);
+    private void add(PostListing postListing, ListPostsAdapter listPostsAdapter) {
+        listPostsAdapter.addToPostList(postListing);
     }
 
-    private void append(Post post, ListPostsAdapter listPostsAdapter, int totalItemsCount) {
-        listPostsAdapter.appendOnPostList(post, totalItemsCount);
+    private void append(PostListing postListing, ListPostsAdapter listPostsAdapter, int totalItemsCount) {
+        listPostsAdapter.appendOnPostList(postListing, totalItemsCount);
     }
 }

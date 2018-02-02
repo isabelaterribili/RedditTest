@@ -1,15 +1,10 @@
-package com.example.isabela.reddittest.presentation;
+package com.example.isabela.reddittest.presentation.presenter;
 
 import android.content.Context;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
-import com.example.isabela.reddittest.ListPostsAdapter;
-import com.example.isabela.reddittest.Post;
-import com.example.isabela.reddittest.PostComment;
-import com.example.isabela.reddittest.PostListClient;
-import com.example.isabela.reddittest.postdetail.ListCommentAdapter;
+import com.example.isabela.reddittest.client.model.CommentListing;
+import com.example.isabela.reddittest.client.PostListClient;
+import com.example.isabela.reddittest.presentation.adapter.ListCommentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,31 +14,25 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by isabela on 01/02/2018.
- */
+public class CommentListPresenter {
 
-public class CommentListPostDetailPresenter {
+    private Context context;
 
-    public CommentListPostDetailPresenter(Context context) {
+    public CommentListPresenter(Context context) {
         this.context = context;
     }
-
-    Context context;
-
 
     public void loadCommentPostList(final ListCommentAdapter listCommentAdapter, String postId) {
 
         PostListClient postListClient = new PostListClient();
 
-        Observable<List<PostComment>> postCommentObservable = postListClient.initObservableComments(postId);
+        Observable<List<CommentListing>> postCommentObservable = postListClient.initObservableComments(postId);
 
         postCommentObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()) //TODO diposable
-                .subscribe(new Observer<List<PostComment>>() {
+                .subscribe(new Observer<List<CommentListing>>() {
 
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -51,10 +40,10 @@ public class CommentListPostDetailPresenter {
                     }
 
                     @Override
-                    public void onNext(@NonNull List<PostComment> postComments) {
+                    public void onNext(@NonNull List<CommentListing> commentListings) {
                         List<String> list = new ArrayList<>();
-                        for (PostComment postComment : postComments) {
-                            list.addAll(postComment.getComments());
+                        for (CommentListing commentListing : commentListings) {
+                            list.addAll(commentListing.getComments());
                         }
                         add(list, listCommentAdapter);
                     }

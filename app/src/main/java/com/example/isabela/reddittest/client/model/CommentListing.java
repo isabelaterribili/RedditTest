@@ -1,54 +1,48 @@
-package com.example.isabela.reddittest;
+package com.example.isabela.reddittest.client.model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by isabela on 30/01/2018.
- */
-
-public class PostComment {
+public class CommentListing {
 
     @SerializedName("kind")
-    String kind;
+    private String kind;
 
     @SerializedName("data")
-    DataList dataList;
+    private Data data;
 
-    private class DataList {
+    private class Data {
         @SerializedName("after")
-        String afterId;
+        private String afterId;
 
         @SerializedName("before")
-        String beforeId;
+        private String beforeId;
 
         @SerializedName("children")
-        List<Child> children;
+        private List<Child> children;
     }
 
     public class Child {
-
         @SerializedName("kind")
-        String kind;
+        private String kind;
 
         @SerializedName("data")
-        DataCommentList dataCommentList;
+        private Comment comment;
     }
 
-    private class DataCommentList {
-
+    private class Comment {
         @SerializedName("body")
-        String commentPost;
+        private String commentPost;
     }
 
     public List<String> getComments() {
         List<String> list = new ArrayList<>();
 
-        for (Child child : this.dataList.children) {
+        for (Child child : this.data.children) {
             if ("t1".equals(child.kind))
-                list.add(child.dataCommentList.commentPost);
+                list.add(child.comment.commentPost);
         }
         return list;
     }

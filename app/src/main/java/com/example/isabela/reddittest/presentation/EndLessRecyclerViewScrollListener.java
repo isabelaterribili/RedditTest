@@ -1,11 +1,7 @@
-package com.example.isabela.reddittest;
+package com.example.isabela.reddittest.presentation;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-/**
- * Created by isabela on 01/02/2018.
- */
 
 public abstract class EndLessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 

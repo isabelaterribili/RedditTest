@@ -1,7 +1,8 @@
-package com.example.isabela.reddittest;
+package com.example.isabela.reddittest.client;
+
+import com.example.isabela.reddittest.client.PostListClient;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by isabela on 30/01/2018.

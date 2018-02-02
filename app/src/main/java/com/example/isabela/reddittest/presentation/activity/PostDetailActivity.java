@@ -1,4 +1,4 @@
-package com.example.isabela.reddittest.presentation;
+package com.example.isabela.reddittest.presentation.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.isabela.reddittest.R;
-import com.example.isabela.reddittest.postdetail.ListCommentAdapter;
+import com.example.isabela.reddittest.presentation.adapter.ListCommentAdapter;
+import com.example.isabela.reddittest.presentation.presenter.CommentListPresenter;
 import com.squareup.picasso.Picasso;
 
 
@@ -22,11 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
-
-
-/**
- * Created by isabela on 29/01/2018.
- */
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -45,10 +41,10 @@ public class PostDetailActivity extends AppCompatActivity {
     @BindView(R.id.post_image_detail)
     ImageView postImageDetail;
 
-    String postId;
-    String postTitle;
-    String postUrl;
-    String postImageUrl;
+    private String postId;
+    private String postTitle;
+    private String postUrl;
+    private String postImageUrl;
 
     private static final String POST_ID = "post_id";
     private static final String POST_TITLE = "post_title";
@@ -56,7 +52,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private static final String POST_URL_IMAGE = "post_url_image";
 
     private ListCommentAdapter listCommentAdapter;
-    private CommentListPostDetailPresenter commentListPostDetailPresenter;
+    private CommentListPresenter commentListPresenter;
 
 
     @Override
@@ -69,7 +65,7 @@ public class PostDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setUpToolbar();
 
-        commentListPostDetailPresenter = new CommentListPostDetailPresenter(PostDetailActivity.this);
+        commentListPresenter = new CommentListPresenter(PostDetailActivity.this);
 
         listCommentAdapter = new ListCommentAdapter(PostDetailActivity.this);
 
@@ -77,7 +73,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         initRecyclerViewCellLayout(recyclerViewCommentCell);
 
-        commentListPostDetailPresenter.loadCommentPostList(listCommentAdapter, postId);
+        commentListPresenter.loadCommentPostList(listCommentAdapter, postId);
 
         postDetailTitle.setText(postTitle);
         postDetailUrl.setText(postUrl);

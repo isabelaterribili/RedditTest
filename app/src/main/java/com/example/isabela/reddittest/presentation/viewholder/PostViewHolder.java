@@ -1,4 +1,4 @@
-package com.example.isabela.reddittest;
+package com.example.isabela.reddittest.presentation.viewholder;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,15 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.model.PostModel;
-import com.example.isabela.reddittest.presentation.PostDetailActivity;
+import com.example.isabela.reddittest.presentation.activity.PostDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
-
-/**
- * Created by isabela on 25/01/2018.
- */
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
@@ -25,7 +22,6 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     private static final String POST_URL = "post_url";
     private static final String POST_URL_IMAGE = "post_url_image";
 
-
     private Context context;
 
     private TextView postTitle;
@@ -33,7 +29,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     private TextView postScore;
     private View view;
 
-    PostViewHolder(Context context, View view) {
+    public PostViewHolder(Context context, View view) {
         super(view);
 
         this.context = context;
