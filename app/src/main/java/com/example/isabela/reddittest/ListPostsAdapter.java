@@ -43,7 +43,7 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void append(Post post, int totalItemsCount) {
+    public void appendOnPostList(Post post, int totalItemsCount) {
         this.postAfterId = post.getPostAfterId();
 
         for (Post.Child child : post.getChildrenList()) {

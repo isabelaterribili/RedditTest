@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -40,15 +43,30 @@ public class CommentListPostDetailPresenter {
 
         postCommentObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()) //TODO diposable
-                .subscribe(new Consumer<List<PostComment>>() {
+                .subscribe(new Observer<List<PostComment>>() {
 
                     @Override
-                    public void accept(List<PostComment> postComments) throws Exception {
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<PostComment> postComments) {
                         List<String> list = new ArrayList<>();
                         for (PostComment postComment : postComments) {
                             list.addAll(postComment.getComments());
                         }
                         add(list, listCommentAdapter);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

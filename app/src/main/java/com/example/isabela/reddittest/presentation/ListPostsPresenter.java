@@ -7,7 +7,10 @@ import com.example.isabela.reddittest.Post;
 import com.example.isabela.reddittest.PostListClient;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -31,10 +34,25 @@ public class ListPostsPresenter {
         postObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Post>() {
+                .subscribe(new Observer<Post>() {
                     @Override
-                    public void accept(Post post) throws Exception {
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Post post) {
                         add(post, listPostsAdapter);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
@@ -48,10 +66,25 @@ public class ListPostsPresenter {
         postObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Post>() {
+                .subscribe(new Observer<Post>() {
                     @Override
-                    public void accept(Post post) throws Exception {
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Post post) {
                         append(post, listPostsAdapter, totalItemsCount);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
@@ -61,6 +94,6 @@ public class ListPostsPresenter {
     }
 
     private void append(Post post, ListPostsAdapter listPostsAdapter, int totalItemsCount) {
-        listPostsAdapter.append(post, totalItemsCount);
+        listPostsAdapter.appendOnPostList(post, totalItemsCount);
     }
 }

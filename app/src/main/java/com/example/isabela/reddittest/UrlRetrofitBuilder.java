@@ -6,8 +6,13 @@ import com.example.isabela.reddittest.presentation.ListPostsActivity;
 
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Scheduler;
+import io.reactivex.functions.Function;
 import okhttp3.OkHttpClient;
+import retrofit2.HttpException;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -29,18 +34,11 @@ public class UrlRetrofitBuilder {
     public Retrofit createUrl() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-//                .client(provideOkHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit;
     }
-
-    private OkHttpClient provideOkHttpClient() {
-        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
-        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
-        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
-        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
-        return okhttpClientBuilder.build();
-    }
 }
+
+
