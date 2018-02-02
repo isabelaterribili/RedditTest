@@ -2,14 +2,12 @@ package com.example.isabela.reddittest.model;
 
 public class PostModel {
 
-    private String postTitle;
-    private String postThumbnail;
-    private int postScore;
-
-    private String postId;
-    private String postUrl;
-    private String postImage;
-
+    private final String postTitle;
+    private final String postThumbnail;
+    private final int postScore;
+    private final String postId;
+    private final String postUrl;
+    private final String postImage;
 
     public PostModel(String postTitle, String postThumbnail, int postScore, String postId, String postUrl, String postImage) {
         this.postTitle = postTitle;

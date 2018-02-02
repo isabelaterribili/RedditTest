@@ -2,7 +2,7 @@ package com.example.isabela.reddittest.model;
 
 public class CommentModel {
 
-    private String commentPost;
+    private final String commentPost;
 
     public CommentModel(String commentPost) {
         this.commentPost = commentPost;

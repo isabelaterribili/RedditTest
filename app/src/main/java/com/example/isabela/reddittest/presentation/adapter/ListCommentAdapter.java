@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListCommentAdapter extends RecyclerView.Adapter {
-
     private Context context;
     private List<CommentModel> commentModelList = new ArrayList<>();
 
@@ -22,9 +21,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter {
         this.context = context;
     }
 
-
     public void addComments(List<String> postComments) {
-
         for (String comment : postComments) {
             commentModelList.add(new CommentModel(comment));
         }
@@ -43,7 +40,6 @@ public class ListCommentAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         CommentViewHolder postViewHolder = (CommentViewHolder) viewHolder;
 
         CommentModel commentModel = commentModelList.get(position);
