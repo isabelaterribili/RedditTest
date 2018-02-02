@@ -50,7 +50,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter {
 
         PostCommentModel postCommentModel = postCommentModelList.get(position);
 
-        postViewHolder.setModel(postCommentModel);
+        postViewHolder.bind(postCommentModel);
     }
 
     @Override

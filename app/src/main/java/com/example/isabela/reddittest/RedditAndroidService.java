@@ -16,7 +16,7 @@ public interface RedditAndroidService {
     @GET("r/Android/new/.json")
     Observable<Post> listPosts();
 
-    @GET("r/Android/new/.json")   //https://www.reddit.com/r/Android/new/.json?after=t3_7t96zs
+    @GET("r/Android/new/.json")
     Observable<Post> getNextPage(@Query("after") String afterId);
 
     @GET("r/Android/comments/{id}/.json")

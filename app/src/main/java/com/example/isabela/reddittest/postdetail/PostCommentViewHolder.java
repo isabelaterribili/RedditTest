@@ -27,7 +27,7 @@ public class PostCommentViewHolder extends RecyclerView.ViewHolder {
         this.imagePostDetail = (ImageView) view.findViewById(R.id.comment_placeholder);
     }
 
-    public void setModel(PostCommentModel postCommentModel) {
+    public void bind(PostCommentModel postCommentModel) {
         postComment.setText(postCommentModel.getCommentPost());
         imagePostDetail.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_icon_reddit_comment));
     }

@@ -60,7 +60,7 @@ public class ListPostsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    public void initRecyclerViewPostCellLayout(RecyclerView recyclerViewPostCell) {
+    private void initRecyclerViewPostCellLayout(RecyclerView recyclerViewPostCell) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
 
@@ -73,15 +73,14 @@ public class ListPostsActivity extends AppCompatActivity {
         scrollListener = new EndLessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                callNextPage(view.getChildCount(), totalItemsCount);
-//                listPostsPresenter.loadNextPostList(listPostsAdapter, totalItemsCount);
+                callNextPage(totalItemsCount);
             }
         };
         recyclerViewPostCell.addOnScrollListener(scrollListener);
     }
 
-    public void callNextPage(int childCount, int totalItemsCount) {
-        listPostsPresenter.loadNextPostList(listPostsAdapter, childCount, totalItemsCount);
+    public void callNextPage(int totalItemsCount) {
+        listPostsPresenter.loadNextPostList(listPostsAdapter, totalItemsCount);
     }
 }
 

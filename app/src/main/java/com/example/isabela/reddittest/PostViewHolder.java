@@ -18,7 +18,7 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
  * Created by isabela on 25/01/2018.
  */
 
-public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class PostViewHolder extends RecyclerView.ViewHolder {
 
     private static final String POST_ID = "post_id";
     private static final String POST_TITLE = "post_title";
@@ -27,43 +27,30 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
     private Context context;
-    private PostModel model;
 
     private TextView postTitle;
     private ImageView postThumbnail;
     private TextView postScore;
-
+    private View view;
 
     PostViewHolder(Context context, View view) {
         super(view);
 
         this.context = context;
+        this.view = view;
 
         this.postTitle = (TextView) view.findViewById(R.id.post_title);
         this.postThumbnail = (ImageView) view.findViewById(R.id.image_post);
         this.postScore = (TextView) view.findViewById(R.id.score);
-
-        view.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(context, PostDetailActivity.class);
-        intent.putExtra(POST_ID, model.getPostId());
-        intent.putExtra(POST_TITLE, model.getPostTitle());
-        intent.putExtra(POST_URL, model.getPostUrl());
-        intent.putExtra(POST_URL_IMAGE, model.getPostImage());
-        context.startActivity(intent);
-    }
-
-    public void setModel(PostModel postModel) {
-        model = postModel;
+    public void bind(final PostModel postModel) {
         postTitle.setText(postModel.getPostTitle());
 
         Uri uri = Uri.parse(postModel.getPostThumbnail());
-        Context context = postThumbnail.getContext();
+        Context postThumbnailContext = postThumbnail.getContext();
 
-        Picasso.with(context)
+        Picasso.with(postThumbnailContext)
                 .load(uri)
                 .transform(new RoundedCornersTransformation(10, 10))
                 .resize(150, 150)
@@ -72,7 +59,18 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 .error(R.drawable.ic_post_placeholder)
                 .into(postThumbnail);
 
+        postScore.setText(postThumbnailContext.getString(R.string.score) + postModel.getPostScore());
 
-        postScore.setText(context.getString(R.string.score) + postModel.getPostScore());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PostDetailActivity.class);
+                intent.putExtra(POST_ID, postModel.getPostId());
+                intent.putExtra(POST_TITLE, postModel.getPostTitle());
+                intent.putExtra(POST_URL, postModel.getPostUrl());
+                intent.putExtra(POST_URL_IMAGE, postModel.getPostImage());
+                context.startActivity(intent);
+            }
+        });
     }
 }
