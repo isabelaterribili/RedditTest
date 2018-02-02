@@ -22,19 +22,17 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     private static final String POST_URL = "post_url";
     private static final String POST_URL_IMAGE = "post_url_image";
 
-    private Context context;
-
-    private TextView postTitle;
-    private ImageView postThumbnail;
-    private TextView postScore;
-    private View view;
+    private final Context context;
+    private final TextView postTitle;
+    private final ImageView postThumbnail;
+    private final TextView postScore;
+    private final View view;
 
     public PostViewHolder(Context context, View view) {
         super(view);
 
         this.context = context;
         this.view = view;
-
         this.postTitle = (TextView) view.findViewById(R.id.post_title);
         this.postThumbnail = (ImageView) view.findViewById(R.id.image_post);
         this.postScore = (TextView) view.findViewById(R.id.score);

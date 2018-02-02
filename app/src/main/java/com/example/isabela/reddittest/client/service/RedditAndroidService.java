@@ -3,6 +3,7 @@ package com.example.isabela.reddittest.client.service;
 import com.example.isabela.reddittest.client.model.PostListing;
 import com.example.isabela.reddittest.client.model.CommentListing;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -19,6 +20,6 @@ public interface RedditAndroidService {
     Observable<PostListing> getNextPage(@Query("after") String afterId);
 
     @GET("r/Android/comments/{id}/.json")
-    Observable<List<CommentListing>> listComments(@Path("id") String id);
+    Observable<ArrayList<CommentListing>> listComments(@Path("id") String id);
 
 }

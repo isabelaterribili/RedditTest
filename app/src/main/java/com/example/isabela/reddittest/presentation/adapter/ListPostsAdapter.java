@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListPostsAdapter extends RecyclerView.Adapter {
-
     private Context context;
     private String postAfterId;
     private List<PostModel> listPostModel = new ArrayList<>();
@@ -69,7 +68,6 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         PostViewHolder postViewHolder = (PostViewHolder) viewHolder;
 
         PostModel postModel = listPostModel.get(position);

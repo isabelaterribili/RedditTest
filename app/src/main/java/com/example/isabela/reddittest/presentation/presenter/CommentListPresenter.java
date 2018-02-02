@@ -1,21 +1,14 @@
 package com.example.isabela.reddittest.presentation.presenter;
 
-import android.content.Context;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-
-import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.client.DisposableManager;
+import com.example.isabela.reddittest.client.PostListClient;
 import com.example.isabela.reddittest.client.RetrofitFactory;
 import com.example.isabela.reddittest.client.model.CommentListing;
-import com.example.isabela.reddittest.client.PostListClient;
 import com.example.isabela.reddittest.client.service.RedditAndroidService;
-import com.example.isabela.reddittest.presentation.adapter.ListCommentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -34,7 +27,7 @@ public class CommentListPresenter {
         client.getListComments(postId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<CommentListing>>() {
+                .subscribe(new Observer<ArrayList<CommentListing>>() {
 
                     @Override
                     public void onSubscribe(@NonNull Disposable disposable) {
@@ -42,7 +35,7 @@ public class CommentListPresenter {
                     }
 
                     @Override
-                    public void onNext(@NonNull List<CommentListing> commentListings) {
+                    public void onNext(@NonNull ArrayList<CommentListing> commentListings) {
                         List<String> list = new ArrayList<>();
                         for (CommentListing commentListing : commentListings) {
                             list.addAll(commentListing.getComments());

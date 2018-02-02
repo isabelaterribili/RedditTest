@@ -12,14 +12,12 @@ public class PostListing {
     @SerializedName("data")
     private Data data;
 
-
     private PostListing(String kind, Data data) {
         this.kind = kind;
         this.data = data;
     }
 
     public PostListing() {
-
     }
 
     private class Data {

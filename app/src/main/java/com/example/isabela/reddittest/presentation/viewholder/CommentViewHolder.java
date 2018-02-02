@@ -11,9 +11,9 @@ import com.example.isabela.reddittest.model.CommentModel;
 
 public class CommentViewHolder extends RecyclerView.ViewHolder {
 
-    private Context context;
-    private TextView commentText;
-    private ImageView imagePostDetail;
+    private final Context context;
+    private final TextView commentText;
+    private final ImageView imagePostDetail;
 
     public CommentViewHolder(Context context, View view) {
         super(view);
