@@ -24,20 +24,16 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CommentListPresenter {
 
-    private final Context context; //TODO REMOVER CONTEXT
     private final PostListClient client;
 
-    public CommentListPresenter(Context context) {
-        this.context = context;
+    public CommentListPresenter() {
         this.client = new PostListClient(new RetrofitFactory().build().create(RedditAndroidService.class));
     }
 
-    public void loadCommentPostList(final ListCommentAdapter listCommentAdapter, String postId, final View view) {
-
-        Observable<List<CommentListing>> postCommentObservable = client.getListComments(postId);
-
-        postCommentObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()) //TODO diposable
+    public void loadCommentPostList(String postId, final ListingListener listener) {
+        client.getListComments(postId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<CommentListing>>() {
 
                     @Override
@@ -51,22 +47,21 @@ public class CommentListPresenter {
                         for (CommentListing commentListing : commentListings) {
                             list.addAll(commentListing.getComments());
                         }
-                        add(list, listCommentAdapter);
+                        listener.addToCommentList(list);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Snackbar.make(view, R.string.no_connection_message, Snackbar.LENGTH_SHORT).show();
+                        listener.onError();
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 
-    public void add(List<String> postComments, ListCommentAdapter listCommentAdapter) {
-        listCommentAdapter.addComments(postComments);
+    public interface ListingListener {
+        void addToCommentList(List<String> list);
+        void onError();
     }
 }

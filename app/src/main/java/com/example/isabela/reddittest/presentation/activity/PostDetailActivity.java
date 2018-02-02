@@ -3,6 +3,7 @@ package com.example.isabela.reddittest.presentation.activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,6 +20,7 @@ import com.example.isabela.reddittest.presentation.adapter.ListCommentAdapter;
 import com.example.isabela.reddittest.presentation.presenter.CommentListPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +44,6 @@ public class PostDetailActivity extends AppCompatActivity {
     @BindView(R.id.post_image_detail)
     ImageView postImageDetail;
 
-    private String postId;
     private String postTitle;
     private String postUrl;
     private String postImageUrl;
@@ -55,41 +56,41 @@ public class PostDetailActivity extends AppCompatActivity {
     private ListCommentAdapter listCommentAdapter;
     private CommentListPresenter commentListPresenter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getExtras();
 
         setContentView(R.layout.activity_post_detail);
         ButterKnife.bind(this);
         setUpToolbar();
 
-
-        commentListPresenter = new CommentListPresenter(PostDetailActivity.this);
-
+        commentListPresenter = new CommentListPresenter();
         listCommentAdapter = new ListCommentAdapter(PostDetailActivity.this);
-
         recyclerViewCommentCell.setAdapter(listCommentAdapter);
-
         initRecyclerViewCellLayout(recyclerViewCommentCell);
 
-        commentListPresenter.loadCommentPostList(listCommentAdapter, postId, getView());
+        String postId = getIntent().getExtras().getString(POST_ID);
+        commentListPresenter.loadCommentPostList(postId, new CommentListPresenter.ListingListener() {
+            @Override
+            public void addToCommentList(List<String> list) {
+                listCommentAdapter.addComments(list);
+            }
 
+            @Override
+            public void onError() {
+                PostDetailActivity.this.onError();
+            }
+        });
+
+        postTitle = getIntent().getExtras().getString(POST_TITLE);
+        postUrl = getIntent().getExtras().getString(POST_URL);
+        postImageUrl = getIntent().getExtras().getString(POST_URL_IMAGE);
         postDetailTitle.setText(postTitle);
         postDetailUrl.setText(postUrl);
         loadPostImageDetail(postImageUrl);
     }
 
-    public void getExtras() {
-        postId = getIntent().getExtras().getString(POST_ID);
-        postTitle = getIntent().getExtras().getString(POST_TITLE);
-        postUrl = getIntent().getExtras().getString(POST_URL);
-        postImageUrl = getIntent().getExtras().getString(POST_URL_IMAGE);
-    }
-
-    public void setUpToolbar() {
+    private void setUpToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -100,8 +101,7 @@ public class PostDetailActivity extends AppCompatActivity {
         });
     }
 
-    public void initRecyclerViewCellLayout(RecyclerView recyclerViewCommentCell) {
-
+    private void initRecyclerViewCellLayout(RecyclerView recyclerViewCommentCell) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
 
@@ -111,7 +111,7 @@ public class PostDetailActivity extends AppCompatActivity {
         recyclerViewCommentCell.addItemDecoration(recyclerViewDecoration);
     }
 
-    public void navigateToCustomChromeTabs(String postDetailUrl) {
+    private void navigateToCustomChromeTabs(String postDetailUrl) {
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = builder.build();
 
@@ -120,13 +120,12 @@ public class PostDetailActivity extends AppCompatActivity {
         customTabsIntent.launchUrl(this, Uri.parse(postDetailUrl));
     }
 
-
     @OnClick(R.id.post_detail)
     void post_detail() {
         navigateToCustomChromeTabs(postUrl);
     }
 
-    public void loadPostImageDetail(String postImageUrl) {
+    private void loadPostImageDetail(String postImageUrl) {
         Uri uri = Uri.parse(postImageUrl);
 
         Picasso.with(this)
@@ -139,11 +138,10 @@ public class PostDetailActivity extends AppCompatActivity {
                 .into(postImageDetail);
     }
 
-    private View getView() {
+    private void onError() {
         View view = findViewById(R.id.activity_post_detail);
-        return view;
+        Snackbar.make(view, R.string.no_connection_message, Snackbar.LENGTH_SHORT).show();
     }
-
 
     @Override
     public void onDestroy() {

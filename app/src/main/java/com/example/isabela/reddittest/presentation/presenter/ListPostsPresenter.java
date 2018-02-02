@@ -73,13 +73,11 @@ public class ListPostsPresenter {
 
     public interface ListingListener {
         void addToPostList(PostListing postListing);
-
         void onError();
     }
 
     public interface PaginationListener {
         void appendOnPostList(PostListing postListing, int totalItemsCount);
-
         void onError();
     }
 }
