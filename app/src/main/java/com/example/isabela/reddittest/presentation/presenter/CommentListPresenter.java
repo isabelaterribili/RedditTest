@@ -6,8 +6,10 @@ import android.view.View;
 
 import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.client.DisposableManager;
+import com.example.isabela.reddittest.client.RetrofitFactory;
 import com.example.isabela.reddittest.client.model.CommentListing;
 import com.example.isabela.reddittest.client.PostListClient;
+import com.example.isabela.reddittest.client.service.RedditAndroidService;
 import com.example.isabela.reddittest.presentation.adapter.ListCommentAdapter;
 
 import java.util.ArrayList;
@@ -22,17 +24,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CommentListPresenter {
 
-    private Context context;
+    private final Context context; //TODO REMOVER CONTEXT
+    private final PostListClient client;
 
     public CommentListPresenter(Context context) {
         this.context = context;
+        this.client = new PostListClient(new RetrofitFactory().build().create(RedditAndroidService.class));
     }
 
     public void loadCommentPostList(final ListCommentAdapter listCommentAdapter, String postId, final View view) {
 
-        PostListClient postListClient = new PostListClient();
-
-        Observable<List<CommentListing>> postCommentObservable = postListClient.getListComments(postId);
+        Observable<List<CommentListing>> postCommentObservable = client.getListComments(postId);
 
         postCommentObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()) //TODO diposable

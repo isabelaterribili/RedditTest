@@ -8,16 +8,12 @@ public class RetrofitFactory {
 
     private static final String BASE_URL = "https://www.reddit.com/";
 
-    public RetrofitFactory() {
-    }
-
     public Retrofit build() {
-        Retrofit retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        return retrofit;
     }
 
 }

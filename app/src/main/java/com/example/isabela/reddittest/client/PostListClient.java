@@ -7,28 +7,33 @@ import com.example.isabela.reddittest.client.model.CommentListing;
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.Retrofit;
 
 public class PostListClient {
 
+    private final RedditAndroidService service;
+
+    public PostListClient(RedditAndroidService service) {
+        this.service = service;
+    }
+
     public Observable<PostListing> getListPost() {
 
-        return createRedditAndroidService().listPosts();
+        return service.listPosts();
     }
 
     public Observable<List<CommentListing>> getListComments(String postId) {
 
-        return createRedditAndroidService().listComments(postId);
+        return service.listComments(postId);
     }
 
     public Observable<PostListing> getNextPagePostList(String afterId) {
 
-        return createRedditAndroidService().getNextPage(afterId);
+        return service.getNextPage(afterId);
     }
 
-    private RedditAndroidService createRedditAndroidService() {
-        Retrofit retrofit = new RetrofitFactory().build();
-
-        return retrofit.create(RedditAndroidService.class);
-    }
+//    private RedditAndroidService createRedditAndroidService() {
+//        Retrofit retrofit = new RetrofitFactory().build();
+//
+//        return retrofit.create(RedditAndroidService.class);
+//    }
 }

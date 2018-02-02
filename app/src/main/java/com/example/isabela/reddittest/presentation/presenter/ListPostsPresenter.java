@@ -1,16 +1,11 @@
 package com.example.isabela.reddittest.presentation.presenter;
 
-import android.content.Context;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-
-import com.example.isabela.reddittest.R;
 import com.example.isabela.reddittest.client.DisposableManager;
-import com.example.isabela.reddittest.client.model.PostListing;
 import com.example.isabela.reddittest.client.PostListClient;
-import com.example.isabela.reddittest.presentation.adapter.ListPostsAdapter;
+import com.example.isabela.reddittest.client.RetrofitFactory;
+import com.example.isabela.reddittest.client.model.PostListing;
+import com.example.isabela.reddittest.client.service.RedditAndroidService;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -18,20 +13,14 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ListPostsPresenter {
+    private final PostListClient client;
 
-    private Context context;
-
-    public ListPostsPresenter(Context context) {
-        this.context = context;
+    public ListPostsPresenter() {
+        this.client = new PostListClient(new RetrofitFactory().build().create(RedditAndroidService.class));
     }
 
-    public void loadPostList(final ListPostsAdapter listPostsAdapter, final View view) {
-
-        //TODO diposable
-        PostListClient postListClient = new PostListClient();
-        Observable<PostListing> postObservable = postListClient.getListPost();
-
-        postObservable
+    public void loadPostList(final ListingListener listener) {
+        client.getListPost()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PostListing>() {
@@ -42,28 +31,22 @@ public class ListPostsPresenter {
 
                     @Override
                     public void onNext(@NonNull PostListing postListing) {
-                        add(postListing, listPostsAdapter);
+                        listener.addToPostList(postListing);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        showSnackBar(view);
+                        listener.onError();
                     }
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
 
-    public void loadNextPostList(final ListPostsAdapter listPostsAdapter, final int totalItemsCount, final View view) {
-
-        //TODO diposable
-        PostListClient postListClient = new PostListClient();
-        Observable<PostListing> postObservable = postListClient.getNextPagePostList(listPostsAdapter.getPostAfterId());
-
-        postObservable
+    public void paginatePostList(final int totalItemsCount, String postAfterId, final PaginationListener listener) {
+        client.getNextPagePostList(postAfterId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PostListing>() {
@@ -74,30 +57,29 @@ public class ListPostsPresenter {
 
                     @Override
                     public void onNext(@NonNull PostListing postListing) {
-                        append(postListing, listPostsAdapter, totalItemsCount);
+                        listener.appendOnPostList(postListing, totalItemsCount);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        showSnackBar(view);
+                        listener.onError();
                     }
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
 
-    private void add(PostListing postListing, ListPostsAdapter listPostsAdapter) {
-        listPostsAdapter.addToPostList(postListing);
+    public interface ListingListener {
+        void addToPostList(PostListing postListing);
+
+        void onError();
     }
 
-    private void append(PostListing postListing, ListPostsAdapter listPostsAdapter, int totalItemsCount) {
-        listPostsAdapter.appendOnPostList(postListing, totalItemsCount);
-    }
+    public interface PaginationListener {
+        void appendOnPostList(PostListing postListing, int totalItemsCount);
 
-    private void showSnackBar(View view) {
-        Snackbar.make(view, R.string.no_connection_message, Snackbar.LENGTH_SHORT).show();
+        void onError();
     }
 }
