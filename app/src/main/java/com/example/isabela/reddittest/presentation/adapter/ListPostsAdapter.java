@@ -82,4 +82,8 @@ public class ListPostsAdapter extends RecyclerView.Adapter {
         return listPostModel.size();
     }
 
+    public void clear() {
+        listPostModel.clear();
+    }
+
 }

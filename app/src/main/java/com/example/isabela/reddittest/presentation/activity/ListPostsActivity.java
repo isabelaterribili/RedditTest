@@ -1,5 +1,6 @@
 package com.example.isabela.reddittest.presentation.activity;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,6 +21,9 @@ import butterknife.ButterKnife;
 
 public class ListPostsActivity extends AppCompatActivity {
 
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @BindView(R.id.post_recycler_view_cell)
     RecyclerView recyclerViewPostCell;
 
@@ -37,6 +41,8 @@ public class ListPostsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setUpToolbar();
+
+        pullToRefresh();
 
         listPostsPresenter = new ListPostsPresenter(ListPostsActivity.this);
 
@@ -77,6 +83,25 @@ public class ListPostsActivity extends AppCompatActivity {
 
     public void callNextPage(int totalItemsCount) {
         listPostsPresenter.loadNextPostList(listPostsAdapter, totalItemsCount);
+    }
+
+    public void pullToRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                listPostsAdapter.clear();
+                listPostsAdapter.notifyItemRangeRemoved(0, listPostsAdapter.getItemCount());
+
+                recyclerViewPostCell.removeAllViewsInLayout();
+
+                scrollListener.resetState();
+
+                listPostsPresenter.loadPostList(listPostsAdapter);
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
